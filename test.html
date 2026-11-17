@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>Mock Test · NEET Saathi</title>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box}[hidden]{display:none!important}
+:root{--bg:#F5F7FB;--fg:#0F1B33;--mu:#5B6785;--ln:#E2E7F0;--ac:#2563EB;--ok:#16A34A;--no:#DC2626}
+body{margin:0;background:var(--bg);color:var(--fg);font:400 16px/1.5 Inter,system-ui,sans-serif}
+a,button{color:inherit;font-family:inherit;text-decoration:none}a:focus-visible,button:focus-visible{outline:2px solid var(--ac);outline-offset:2px}
+.nv{height:57px;display:flex;justify-content:space-between;align-items:center;padding:0 18px;background:#fff;border-bottom:1px solid var(--ln)}
+.logo{font:700 18px Sora;letter-spacing:-.01em}.nl{display:none;gap:26px;font-size:14px;color:var(--mu)}.nl a:hover,.nl a.on{color:var(--fg)}.nl a.on{font-weight:600}
+.login{border:1px solid var(--ln);padding:6px 14px;border-radius:6px;font-size:13px;font-weight:500}
+.w{max-width:980px;margin:0 auto;padding:22px 16px 70px}
+h1{font:800 clamp(26px,5vw,36px)/1.1 Sora;letter-spacing:-.02em;margin:0 0 6px}h2{font:700 20px Sora;margin:0 0 12px}
+.mu{color:var(--mu)}
+.cd{background:#fff;border:1px solid var(--ln);border-radius:12px;padding:18px;box-shadow:0 1px 3px #0f1b3314;margin-bottom:16px}
+.bt{background:var(--fg);color:#fff;border:1px solid var(--fg);border-radius:6px;padding:10px 18px;font:600 14px Inter;cursor:pointer}
+.bg{background:#fff;border:1px solid var(--ln);border-radius:6px;padding:10px 16px;font:500 14px Inter;cursor:pointer}
+.bg:hover{border-color:var(--fg)}.bg.on{background:var(--fg);color:#fff;border-color:var(--fg)}
+.info{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin:18px 0}.info div{background:#F5F7FB;border-radius:8px;padding:12px}.info b{display:block;font:700 20px Sora}.info span{font-size:13px;color:var(--mu)}
+.rules{margin:0 0 18px;padding-left:18px;color:#33415f}.rules li{margin-bottom:4px}
+.tbar{position:sticky;top:0;z-index:10;background:#fff;border-bottom:1px solid var(--ln);padding:10px 16px;display:flex;gap:10px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+.secs{display:flex;gap:6px;flex-wrap:wrap}.timer{font:700 20px Sora;font-variant-numeric:tabular-nums}.timer.low{color:var(--no)}
+.tg{display:grid;gap:16px}
+.qh{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:12px}.qn{font:700 13px Sora;color:var(--mu)}
+.tag{font:600 12px Inter;background:#EEF2FA;border-radius:5px;padding:2px 8px}.tag.w{background:#FEF3C7;color:#92400E}
+.qt{font-size:18px;line-height:1.5;margin:0 0 16px}
+.opt{display:flex;gap:12px;align-items:flex-start;width:100%;text-align:left;padding:12px 14px;border:1px solid var(--ln);border-radius:10px;background:#fff;cursor:pointer;font-size:16px;margin-bottom:10px}
+.opt b{flex:none;width:26px;height:26px;border-radius:6px;background:#EEF2FA;display:grid;place-items:center;font:700 12px Sora}
+.opt:hover{border-color:var(--ac)}.opt.s{border-color:var(--ac);background:#EEF4FF}.opt.s b{background:var(--ac);color:#fff}
+.opt.ok{border-color:var(--ok);background:#F0FDF4;cursor:default}.opt.no{border-color:var(--no);background:#FEF2F2;cursor:default}
+.opt i{margin-left:auto;font:600 12px Inter;font-style:normal;white-space:nowrap}
+.qa{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}.qa .gap{flex:1}
+.pal{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}
+.p{height:40px;border:1px solid var(--ln);border-radius:8px;background:#fff;font:600 14px Inter;cursor:pointer}
+.p.v{background:#FEE2E2;border-color:#FCA5A5}.p.a{background:var(--ok);border-color:var(--ok);color:#fff}.p.m{background:#7C3AED;border-color:#7C3AED;color:#fff}.p.c{outline:2px solid var(--fg);outline-offset:1px}
+.lg{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:12px;color:var(--mu);margin-top:12px}.lg i{display:inline-block;width:11px;height:11px;border-radius:3px;margin-right:5px;vertical-align:-1px;border:1px solid var(--ln)}
+.md{position:fixed;inset:0;background:#0f1b3380;display:grid;place-items:center;padding:16px;z-index:50}.mb{background:#fff;border-radius:14px;padding:22px;max-width:420px;width:100%}
+.sum{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:14px 0 18px}.sum div{background:#F5F7FB;border-radius:8px;padding:10px;text-align:center}.sum b{display:block;font:700 22px Sora}.sum span{font-size:12px;color:var(--mu)}
+.big{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}.big div{background:#F5F7FB;border-radius:10px;padding:14px}.big b{display:block;font:800 26px Sora}.big span{font-size:13px;color:var(--mu)}
+.note{background:#EEF4FF;border:1px solid #C7D8FB;border-radius:10px;padding:12px 14px;margin-bottom:16px;font-size:15px}
+.bar{height:8px;background:#E8EDF6;border-radius:6px;overflow:hidden;margin-top:6px}.bar i{display:block;height:100%;background:var(--ac);border-radius:6px}
+.rw{padding:12px 0;border-top:1px solid var(--ln)}.rw:first-child{border-top:0}.rw .r1{display:flex;justify-content:space-between;gap:10px;font-weight:600}.rw small{color:var(--mu)}
+.chip{font:600 12px Inter;border-radius:5px;padding:2px 8px}.chip.c{background:#DCFCE7;color:#166534}.chip.w{background:#FEE2E2;color:#991B1B}.chip.s{background:#E5E7EB;color:#374151}
+.ex{background:#F5F7FB;border-radius:8px;padding:10px 12px;font-size:15px;margin-top:6px}
+@media(min-width:720px){.nl{display:flex}.nv{padding:0 40px}.info{grid-template-columns:repeat(4,1fr)}.big{grid-template-columns:repeat(3,1fr)}.pal{grid-template-columns:repeat(6,1fr)}}
+@media(min-width:960px){.tg{grid-template-columns:1fr 300px;align-items:start}.pal{grid-template-columns:repeat(5,1fr)}.tbar{padding:10px 40px}}
+</style></head><body>
+<header class="nv"><a class="logo" href="index.html">NEET Saathi</a><div class="nl"><a href="teacher.html">Ask Your Teacher</a><a class="on" href="test.html">Mock Test</a><a href="mistakes.html">Mistake Tracker</a><a href="plan.html">Daily Planner</a></div><a class="login" href="login.html">Log in</a></header>
+
+<section id="st" class="w">
+<div class="cd"><h1 id="tt"></h1><p class="mu">NEET-pattern practice test with Physics, Chemistry and Biology sections.</p>
+<div class="info" id="inf"></div>
+<ul class="rules"><li>Each correct answer carries +4 marks. Each incorrect answer carries -1 mark. Unattempted questions carry no marks.</li><li>Use the question palette to move to any question. Mark a question for review if you want to revisit it.</li><li>The test is submitted automatically when the timer reaches zero.</li><li id="pm"></li></ul>
+<button class="bt" id="go">Begin test</button></div></section>
+
+<section id="ts" hidden>
+<div class="tbar"><div class="secs" id="secs"></div><div class="timer" id="tm">--:--</div></div>
+<div class="w"><div class="tg"><div><div class="cd" id="qc"></div></div>
+<div><div class="cd"><h2>Question palette</h2><div class="pal" id="pal"></div>
+<div class="lg"><span><i style="background:#16A34A"></i>Answered</span><span><i style="background:#FEE2E2"></i>Not answered</span><span><i style="background:#7C3AED"></i>Marked for review</span><span><i style="background:#fff"></i>Not visited</span></div>
+<p style="margin:16px 0 0"><button class="bt" id="sub" style="width:100%">Submit test</button></p></div></div></div></div></section>
+
+<section id="rs" class="w" hidden></section>
+
+<div class="md" id="md" hidden><div class="mb"><h2>Submit this test?</h2><p class="mu" style="margin:0">Please review your progress before submitting.</p><div class="sum" id="ms"></div>
+<div style="display:flex;gap:8px;justify-content:flex-end;flex-wrap:wrap"><button class="bg" id="bk">Return to test</button><button class="bt" id="cf">Submit now</button></div></div></div>
+
+<script>
+/* Demo question bank. Add more questions in the same format (a = index of correct option, 0 to 3). */
+const CFG={title:'NEET Practice Test 1 (Demo)',mins:20,pos:4,neg:1};
+const SK=['Physics','Chemistry','Biology'];
+const Q=[
+{s:'Physics',t:'Work, Energy and Power',q:'A body of mass 2 kg is moving with a velocity of 3 m/s. Its kinetic energy is',o:['3 J','6 J','9 J','18 J'],a:2,e:'Kinetic energy = (1/2)mv² = (1/2) x 2 x 3² = 9 J.'},
+{s:'Physics',t:'Electrostatics',q:'The SI unit of capacitance is',o:['Henry','Farad','Tesla','Weber'],a:1,e:'Capacitance is charge per unit potential difference (C/V). One coulomb per volt is called one farad.'},
+{s:'Physics',t:'Ray Optics',q:'The focal length of a plane mirror is',o:['Zero','Infinity','Positive and finite','Negative and finite'],a:1,e:'A plane mirror has an infinite radius of curvature, so its focal length (R/2) is infinite.'},
+{s:'Physics',t:'Kinematics',q:'A ball is thrown vertically upward with a speed of 20 m/s. Taking g = 10 m/s², the maximum height reached is',o:['10 m','20 m','40 m','5 m'],a:1,e:'At the top v = 0, so h = u²/2g = 400/20 = 20 m.'},
+{s:'Physics',t:'Electromagnetic Waves',q:'Which of the following electromagnetic waves has the highest frequency?',o:['Radio waves','Microwaves','X-rays','Gamma rays'],a:3,e:'Among these, gamma rays have the shortest wavelength and therefore the highest frequency.'},
+{s:'Chemistry',t:'Hydrocarbons',q:'The hybridisation of each carbon atom in ethene (C2H4) is',o:['sp','sp²','sp³','sp³d'],a:1,e:'Each carbon in ethene forms three sigma bonds and one pi bond, which corresponds to sp² hybridisation.'},
+{s:'Chemistry',t:'Equilibrium',q:'The pH of a 0.01 M HCl solution is',o:['1','2','12','0.01'],a:1,e:'HCl is a strong acid, so [H+] = 0.01 M = 10⁻² M and pH = 2.'},
+{s:'Chemistry',t:'Periodic Properties',q:'Which of the following elements is the most electronegative?',o:['Oxygen','Nitrogen','Fluorine','Chlorine'],a:2,e:'Fluorine has the highest electronegativity (4.0 on the Pauling scale).'},
+{s:'Chemistry',t:'Mole Concept',q:'The number of moles in 36 g of water (molar mass 18 g/mol) is',o:['1','2','3','4'],a:1,e:'Moles = mass / molar mass = 36 / 18 = 2.'},
+{s:'Chemistry',t:'Organic Nomenclature',q:'The IUPAC name of CH3CH2OH is',o:['Methanol','Ethanal','Ethanol','Propanol'],a:2,e:'Two carbon atoms give the stem "eth" and the OH group gives the suffix "ol", so the name is ethanol.'},
+{s:'Biology',t:'Cell: Structure and Function',q:'Which cell organelle is known as the powerhouse of the cell?',o:['Ribosome','Golgi apparatus','Mitochondrion','Lysosome'],a:2,e:'Mitochondria produce most of the cell’s ATP through oxidative phosphorylation.'},
+{s:'Biology',t:'Molecular Basis of Inheritance',q:'The semi-conservative nature of DNA replication was experimentally proved by',o:['Watson and Crick','Meselson and Stahl','Hershey and Chase','Griffith'],a:1,e:'Meselson and Stahl used 15N-labelled E. coli to show that DNA replication is semi-conservative.'},
+{s:'Biology',t:'Photosynthesis',q:'The light reactions of photosynthesis take place in the',o:['Stroma','Thylakoid membranes','Outer membrane of chloroplast','Cytoplasm'],a:1,e:'The pigments and electron transport chain are located in the thylakoid membranes of the grana.'},
+{s:'Biology',t:'Body Fluids and Circulation',q:'Which ABO blood group is considered the universal donor for red blood cells?',o:['A','B','AB','O'],a:3,e:'Group O red cells have neither A nor B antigens, so they can be given to recipients of any ABO group.'},
+{s:'Biology',t:'Cell Cycle and Cell Division',q:'The normal number of chromosomes in a human somatic cell is',o:['23','44','46','48'],a:2,e:'Human somatic cells are diploid (2n) with 46 chromosomes, that is, 23 pairs.'}
+].map((x,i)=>({...x,id:x.s[0]+i}));
+const $=i=>document.getElementById(i),L='ABCD';
+const load=(k,d)=>{try{return JSON.parse(localStorage.getItem(k))||d}catch(e){return d}},put=(k,v)=>{try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}};
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+let ans,mk,vs,cur,end,tick,done=0,mist=load('neet_saathi_mistakes',{}),tests=load('neet_saathi_tests',[]);
+const view=id=>{['st','ts','rs'].forEach(x=>$(x).hidden=x!==id);scrollTo(0,0)};
+function home(){$('tt').textContent=CFG.title;const n=Object.keys(mist).filter(k=>Q.some(q=>q.id===k)).length;
+$('inf').innerHTML=[[Q.length,'Questions'],[CFG.mins+' min','Duration'],['+'+CFG.pos+' / -'+CFG.neg,'Marking'],['3','Sections']].map(x=>'<div><b>'+x[0]+'</b><span>'+x[1]+'</span></div>').join('');
+$('pm').textContent=n?n+' question'+(n>1?'s':'')+' in this test '+(n>1?'were':'was')+' answered incorrectly earlier. They are tagged, and will be removed from your Mistake Tracker once you answer them correctly.':'Questions you answer incorrectly are saved to your Mistake Tracker and appear again in future tests until you answer them correctly.';view('st')}
+function start(){ans=Q.map(()=>-1);mk=Q.map(()=>false);vs=Q.map(()=>false);cur=0;done=0;end=Date.now()+CFG.mins*60000;view('ts');draw();clearInterval(tick);tick=setInterval(timer,500);timer()}
+function timer(){let r=Math.round((end-Date.now())/1000);if(r<=0){finish();return}const h=Math.floor(r/3600),m=Math.floor(r%3600/60),s=r%60,t=$('tm');t.textContent=(h?h+':':'')+String(m).padStart(2,'0')+':'+String(s).padStart(2,'0');t.classList.toggle('low',r<=60)}
+function draw(){vs[cur]=true;const q=Q[cur];
+$('secs').innerHTML=SK.map(s=>'<button class="bg'+(q.s===s?' on':'')+'" data-s="'+s+'">'+s+'</button>').join('');
+$('qc').innerHTML='<div class="qh"><span class="qn">Question '+(cur+1)+' of '+Q.length+'</span><span class="tag">'+q.s+'</span>'+(mist[q.id]?'<span class="tag w">Previously incorrect</span>':'')+(mk[cur]?'<span class="tag" style="background:#EDE9FE;color:#5B21B6">Marked for review</span>':'')+'</div><p class="qt">'+esc(q.q)+'</p>'+q.o.map((o,k)=>'<button class="opt'+(ans[cur]===k?' s':'')+'" data-o="'+k+'"><b>'+L[k]+'</b><span>'+esc(o)+'</span></button>').join('')+'<div class="qa"><button class="bg" data-a="prev"'+(cur?'':' disabled')+'>Previous</button><button class="bg" data-a="next"'+(cur<Q.length-1?'':' disabled')+'>Next</button><span class="gap"></span><button class="bg" data-a="clr">Clear response</button><button class="bg'+(mk[cur]?' on':'')+'" data-a="mk">'+(mk[cur]?'Unmark review':'Mark for review')+'</button></div>';
+$('pal').innerHTML=Q.map((x,i)=>'<button class="p'+(i===cur?' c':'')+(mk[i]?' m':ans[i]>=0?' a':vs[i]?' v':'')+'" data-i="'+i+'" aria-label="Question '+(i+1)+'">'+(i+1)+'</button>').join('')}
+$('qc').onclick=e=>{const b=e.target.closest('button');if(!b)return;if(b.dataset.o!=null){ans[cur]=+b.dataset.o}else{const a=b.dataset.a;if(a==='prev'&&cur>0)cur--;if(a==='next'&&cur<Q.length-1)cur++;if(a==='clr')ans[cur]=-1;if(a==='mk')mk[cur]=!mk[cur]}draw()};
+$('pal').onclick=e=>{const b=e.target.closest('button');if(b){cur=+b.dataset.i;draw()}};
+$('secs').onclick=e=>{const s=e.target.dataset.s;if(s){cur=Q.findIndex(q=>q.s===s);draw()}};
+$('sub').onclick=()=>{const a=ans.filter(x=>x>=0).length,m=mk.filter(Boolean).length;$('ms').innerHTML=[[a,'Answered'],[Q.length-a,'Not answered'],[m,'Marked']].map(x=>'<div><b>'+x[0]+'</b><span>'+x[1]+'</span></div>').join('');$('md').hidden=false};
+$('bk').onclick=()=>{$('md').hidden=true};$('cf').onclick=()=>{$('md').hidden=true;finish()};$('go').onclick=start;
+function finish(){if(done)return;done=1;clearInterval(tick);const left=Math.max(0,Math.round((end-Date.now())/1000)),used=CFG.mins*60-left;
+let sc=0,c=0,w=0,sk=0,cleared=0,saved=0;const S={},T={};SK.forEach(s=>S[s]={n:0,c:0,w:0,s:0,m:0});
+Q.forEach((q,i)=>{const a=ans[i],sb=S[q.s],tp=T[q.t]=T[q.t]||{s:q.s,c:0,t:0};sb.n++;tp.t++;
+if(a<0){sk++;sb.s++}else if(a===q.a){c++;sb.c++;sb.m+=CFG.pos;sc+=CFG.pos;tp.c++;if(mist[q.id]){delete mist[q.id];cleared++}}
+else{w++;sb.w++;sb.m-=CFG.neg;sc-=CFG.neg;saved++;const o=mist[q.id];mist[q.id]={id:q.id,s:q.s,t:q.t,q:q.q,o:q.o,a:q.a,e:q.e,mine:a,times:(o?o.times:0)+1,last:Date.now(),reviewed:false}}});
+put('neet_saathi_mistakes',mist);const acc=c+w?Math.round(c/(c+w)*100):0,max=Q.length*CFG.pos;
+tests.push({d:Date.now(),title:CFG.title,sc,max,acc,att:c+w,total:Q.length,subs:S,topics:T});put('neet_saathi_tests',tests.slice(-50));
+result({sc,c,w,sk,acc,max,used,S,T,cleared,saved});view('rs')}
+const mmss=s=>Math.floor(s/60)+' min '+String(s%60).padStart(2,'0')+' s';
+function result(r){let h='<h1>Test result</h1><p class="mu">'+esc(CFG.title)+'</p><div class="cd"><div class="big"><div><b>'+r.sc+' / '+r.max+'</b><span>Score</span></div><div><b>'+r.acc+'%</b><span>Accuracy (correct out of attempted)</span></div><div><b>'+(r.c+r.w)+' / '+Q.length+'</b><span>Attempted</span></div><div><b style="color:var(--ok)">'+r.c+'</b><span>Correct</span></div><div><b style="color:var(--no)">'+r.w+'</b><span>Incorrect</span></div><div><b>'+r.sk+'</b><span>Unattempted</span></div></div><p class="mu" style="margin:12px 0 0">Time taken: '+mmss(r.used)+'</p></div>';
+h+='<div class="note">'+(r.saved?r.saved+' incorrect question'+(r.saved>1?'s were':' was')+' saved to your <a href="mistakes.html" style="text-decoration:underline">Mistake Tracker</a>. They will appear again in future tests. ':'')+(r.cleared?r.cleared+' previously missed question'+(r.cleared>1?'s were':' was')+' answered correctly and removed from your Mistake Tracker.':'')+(!r.saved&&!r.cleared?'No new mistakes to save. Well done.':'')+'</div>';
+h+='<div class="cd"><h2>Subject-wise performance</h2>'+SK.map(s=>{const x=r.S[s],a=x.c+x.w?Math.round(x.c/(x.c+x.w)*100):0;return '<div class="rw"><div class="r1"><span>'+s+'</span><span>'+x.m+' / '+x.n*CFG.pos+' marks</span></div><small>Correct '+x.c+' · Incorrect '+x.w+' · Unattempted '+x.s+' · Accuracy '+a+'%</small><div class="bar"><i style="width:'+a+'%"></i></div></div>'}).join('')+'</div>';
+h+='<div class="cd"><h2>Topic-wise performance</h2><p class="mu" style="margin:-6px 0 8px">Weakest topics are listed first.</p>'+Object.keys(r.T).sort((a,b)=>r.T[a].c/r.T[a].t-r.T[b].c/r.T[b].t).map(k=>{const x=r.T[k],p=Math.round(x.c/x.t*100);return '<div class="rw"><div class="r1"><span>'+esc(k)+'</span><span>'+x.c+' / '+x.t+'</span></div><small>'+x.s+'</small><div class="bar"><i style="width:'+p+'%;background:'+(p<50?'var(--no)':p<80?'#D97706':'var(--ok)')+'"></i></div></div>'}).join('')+'</div>';
+h+='<div class="cd"><h2>Answer review</h2><div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:8px" id="fl"><button class="bg on" data-f="all">All</button><button class="bg" data-f="w">Incorrect</button><button class="bg" data-f="s">Unattempted</button></div><div id="rv"></div></div>';
+h+='<div style="display:flex;gap:8px;flex-wrap:wrap"><button class="bt" id="rt">Retake test</button><a class="bg" href="index.html">Back to home</a><a class="bg" href="mistakes.html">Open Mistake Tracker</a></div>';
+$('rs').innerHTML=h;review('all');$('rt').onclick=home;$('fl').onclick=e=>{const f=e.target.dataset.f;if(!f)return;[].forEach.call($('fl').children,b=>b.classList.toggle('on',b.dataset.f===f));review(f)}}
+function review(f){$('rv').innerHTML=Q.map((q,i)=>{const a=ans[i],st=a<0?'s':a===q.a?'c':'w';if(f!=='all'&&f!==st)return '';
+return '<div class="rw"><div class="r1"><span>Q'+(i+1)+'. '+esc(q.q)+'</span><span class="chip '+st+'">'+(st==='c'?'Correct':st==='w'?'Incorrect':'Unattempted')+'</span></div><div style="margin-top:8px">'+q.o.map((o,k)=>'<div class="opt'+(k===q.a?' ok':k===a?' no':'')+'"><b>'+L[k]+'</b><span>'+esc(o)+'</span><i>'+(k===q.a?'Correct answer':k===a?'Your answer':'')+'</i></div>').join('')+'</div><div class="ex"><b>Explanation.</b> '+esc(q.e)+'</div></div>'}).join('')||'<p class="mu">Nothing to show here.</p>'}
+home();
+</script></body></html>
