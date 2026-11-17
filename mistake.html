@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>Mistake Tracker · NEET Saathi</title>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box}[hidden]{display:none!important}
+:root{--bg:#F5F7FB;--fg:#0F1B33;--mu:#5B6785;--ln:#E2E7F0;--ac:#DB2777;--ok:#16A34A;--no:#DC2626}
+body{margin:0;background:var(--bg);color:var(--fg);font:400 16px/1.5 Inter,system-ui,sans-serif}
+a,button{color:inherit;font-family:inherit;text-decoration:none}a:focus-visible,button:focus-visible{outline:2px solid var(--fg);outline-offset:2px}
+.nv{height:57px;display:flex;justify-content:space-between;align-items:center;padding:0 18px;background:#fff;border-bottom:1px solid var(--ln)}
+.logo{font:700 18px Sora;letter-spacing:-.01em}.nl{display:none;gap:26px;font-size:14px;color:var(--mu)}.nl a:hover,.nl a.on{color:var(--fg)}.nl a.on{font-weight:600}
+.login{border:1px solid var(--ln);padding:6px 14px;border-radius:6px;font-size:13px;font-weight:500}
+.w{max-width:960px;margin:0 auto;padding:24px 16px 70px}
+h1{font:800 clamp(26px,5vw,36px)/1.1 Sora;letter-spacing:-.02em;margin:0 0 6px}h2{font:700 18px Sora;margin:0}
+.mu{color:var(--mu)}
+.stats{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin:18px 0}
+.stats div{background:#fff;border:1px solid var(--ln);border-radius:12px;padding:14px;box-shadow:0 1px 3px #0f1b3314}.stats b{display:block;font:800 26px Sora}.stats span{font-size:13px;color:var(--mu)}
+.how{background:#fff;border:1px solid var(--ln);border-left:4px solid var(--ac);border-radius:10px;padding:14px 16px;margin-bottom:18px;font-size:15px;color:#33415f}
+.fb{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px;align-items:center}.fb .l{font:600 11px Inter;letter-spacing:.14em;text-transform:uppercase;color:var(--mu);margin-right:4px}
+.bg{background:#fff;border:1px solid var(--ln);border-radius:6px;padding:8px 14px;font:500 14px Inter;cursor:pointer}.bg:hover{border-color:var(--fg)}.bg.on{background:var(--fg);color:#fff;border-color:var(--fg)}
+.bt{background:var(--fg);color:#fff;border:1px solid var(--fg);border-radius:6px;padding:9px 16px;font:600 14px Inter;cursor:pointer}.bt:disabled{opacity:.4;cursor:default}
+.pr{background:var(--ac);border-color:var(--ac)}
+.sec{margin-top:26px}.sh{display:flex;align-items:center;gap:10px;margin-bottom:4px}.sh .cn{font:600 12px Inter;background:#EEF2FA;border-radius:5px;padding:2px 8px}
+.tp{font:600 12px Inter;letter-spacing:.1em;text-transform:uppercase;color:var(--mu);margin:16px 0 8px}
+.cd{background:#fff;border:1px solid var(--ln);border-radius:12px;padding:16px;margin-bottom:10px;box-shadow:0 1px 3px #0f1b3314}
+.cd.rv{opacity:.62}
+.qh{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:8px}.tag{font:600 12px Inter;border-radius:5px;padding:2px 8px;background:#EEF2FA}.tag.rp{background:#FEE2E2;color:#991B1B}.tag.ok{background:#DCFCE7;color:#166534}
+.qt{margin:0 0 10px;font-size:17px}
+.an{display:grid;gap:6px;margin-bottom:10px}.an div{border-radius:8px;padding:9px 12px;font-size:15px}
+.an .me{background:#FEF2F2;border:1px solid #FCA5A5}.an .rt{background:#F0FDF4;border:1px solid #86EFAC}.an b{font:600 11px Inter;letter-spacing:.1em;text-transform:uppercase;display:block;color:var(--mu);margin-bottom:2px}
+.ex{background:#F5F7FB;border-radius:8px;padding:10px 12px;font-size:15px;margin-bottom:12px}
+.ac{display:flex;gap:8px;flex-wrap:wrap}.ac .bg{padding:7px 12px;font-size:13px}
+.em{text-align:center;background:#fff;border:1px solid var(--ln);border-radius:12px;padding:40px 18px;margin-top:20px}.em h2{margin-bottom:6px}.em p{margin:0 0 16px;color:var(--mu)}
+.md{position:fixed;inset:0;background:#0f1b3380;display:grid;place-items:center;padding:14px;z-index:50}.mb{background:#fff;border-radius:14px;padding:20px;max-width:560px;width:100%;max-height:92vh;overflow:auto}
+.mh{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;font:700 13px Sora;color:var(--mu)}
+.x{background:none;border:0;font-size:24px;cursor:pointer;color:var(--mu);line-height:1}
+.opt{display:flex;gap:12px;align-items:flex-start;width:100%;text-align:left;padding:11px 14px;border:1px solid var(--ln);border-radius:10px;background:#fff;cursor:pointer;font-size:16px;margin-bottom:9px}
+.opt b{flex:none;width:26px;height:26px;border-radius:6px;background:#EEF2FA;display:grid;place-items:center;font:700 12px Sora}
+.opt:hover{border-color:var(--fg)}.opt.ok{border-color:var(--ok);background:#F0FDF4}.opt.no{border-color:var(--no);background:#FEF2F2}.opt[disabled]{cursor:default}
+.fd{border-radius:8px;padding:10px 12px;margin:6px 0 12px;font-size:15px}.fd.g{background:#DCFCE7;color:#166534}.fd.b{background:#FEE2E2;color:#991B1B}
+.toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:var(--fg);color:#fff;padding:10px 16px;border-radius:8px;font-size:14px;z-index:60}
+@media(min-width:720px){.nl{display:flex}.nv{padding:0 40px}.stats{grid-template-columns:repeat(4,1fr)}}
+</style></head><body>
+<header class="nv"><a class="logo" href="index.html">NEET Saathi</a><div class="nl"><a href="teacher.html">Ask Your Teacher</a><a href="test.html">Mock Test</a><a class="on" href="mistakes.html">Mistake Tracker</a><a href="plan.html">Daily Planner</a></div><a class="login" href="login.html">Log in</a></header>
+<main class="w">
+<h1>Mistake Tracker</h1><p class="mu" style="margin:0">Every question you answered incorrectly, with the correct answer and explanation.</p>
+<div class="stats" id="stats"></div>
+<div class="how"><b>How this works.</b> Incorrect answers from your mock tests are saved here automatically. The same questions reappear in your upcoming tests, and each one is removed from this list once you answer it correctly. Marking a question as reviewed helps you keep track, but it will still appear in tests until you answer it correctly.</div>
+<div class="fb" id="fs"></div><div class="fb" id="ff"></div>
+<div style="margin:10px 0 0"><button class="bt pr" id="pa">Practise these questions</button></div>
+<div id="list"></div>
+</main>
+<div class="md" id="md" hidden><div class="mb" id="mb"></div></div>
+<script>
+const K='neet_saathi_mistakes',SK=['Physics','Chemistry','Biology'],L='ABCD';
+const $=i=>document.getElementById(i),esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+let M={},fs='All',ff='all',pq=[],pi=0,pc=0;
+const load=()=>{try{M=JSON.parse(localStorage.getItem(K))||{}}catch(e){M={}}},save=()=>{try{localStorage.setItem(K,JSON.stringify(M))}catch(e){}};
+function toast(t){const d=document.createElement('div');d.className='toast';d.textContent=t;document.body.appendChild(d);setTimeout(()=>d.remove(),2200)}
+const all=()=>Object.values(M),shown=()=>all().filter(m=>(fs==='All'||m.s===fs)&&(ff==='all'||(ff==='todo'&&!m.reviewed)||(ff==='rev'&&m.reviewed)||(ff==='rep'&&m.times>1)));
+function render(){load();const a=all();
+$('stats').innerHTML=[[a.length,'Questions saved'],[a.filter(m=>!m.reviewed).length,'To review'],[a.filter(m=>m.times>1).length,'Repeated mistakes'],[a.filter(m=>m.reviewed).length,'Reviewed']].map(x=>'<div><b>'+x[0]+'</b><span>'+x[1]+'</span></div>').join('');
+$('fs').innerHTML='<span class="l">Subject</span>'+['All',...SK].map(s=>'<button class="bg'+(fs===s?' on':'')+'" data-s="'+s+'">'+s+(s==='All'?'':' ('+a.filter(m=>m.s===s).length+')')+'</button>').join('');
+$('ff').innerHTML='<span class="l">Show</span>'+[['all','All'],['todo','To review'],['rep','Repeated'],['rev','Reviewed']].map(x=>'<button class="bg'+(ff===x[0]?' on':'')+'" data-f="'+x[0]+'">'+x[1]+'</button>').join('');
+const v=shown();$('pa').disabled=!v.length;
+if(!a.length){$('list').innerHTML='<div class="em"><h2>No mistakes saved yet</h2><p>Take a mock test. Any question you answer incorrectly will be saved here automatically.</p><a class="bt" href="test.html" style="display:inline-block">Take a mock test</a></div>';$('pa').hidden=true;return}
+$('pa').hidden=false;
+if(!v.length){$('list').innerHTML='<div class="em"><h2>Nothing matches this filter</h2><p>Try a different subject or filter.</p></div>';return}
+let h='';SK.forEach(s=>{const g=v.filter(m=>m.s===s);if(!g.length)return;h+='<div class="sec"><div class="sh"><h2>'+s+'</h2><span class="cn">'+g.length+'</span></div>';
+const tops=[...new Set(g.map(m=>m.t))];tops.forEach(t=>{const tg=g.filter(m=>m.t===t);h+='<div class="tp">'+esc(t)+' · '+tg.length+'</div>'+tg.sort((x,y)=>y.times-x.times).map(card).join('')});h+='</div>'});
+$('list').innerHTML=h}
+function card(m){return '<div class="cd'+(m.reviewed?' rv':'')+'"><div class="qh">'+(m.times>1?'<span class="tag rp">Repeated mistake · '+m.times+' times</span>':'')+(m.reviewed?'<span class="tag ok">Reviewed</span>':'')+'</div><p class="qt">'+esc(m.q)+'</p><div class="an"><div class="me"><b>Your answer</b>'+L[m.mine]+'. '+esc(m.o[m.mine])+'</div><div class="rt"><b>Correct answer</b>'+L[m.a]+'. '+esc(m.o[m.a])+'</div></div><div class="ex"><b>Explanation.</b> '+esc(m.e)+'</div><div class="ac"><button class="bg" data-r="'+m.id+'">'+(m.reviewed?'Mark as not reviewed':'Mark as reviewed')+'</button><button class="bg" data-p="'+m.id+'">Practise this question</button></div></div>'}
+$('fs').onclick=e=>{if(e.target.dataset.s){fs=e.target.dataset.s;render()}};$('ff').onclick=e=>{if(e.target.dataset.f){ff=e.target.dataset.f;render()}};
+$('list').onclick=e=>{const r=e.target.dataset.r,p=e.target.dataset.p;if(r){M[r].reviewed=!M[r].reviewed;save();render()}if(p)open([M[p]])};
+$('pa').onclick=()=>open(shown().slice());
+function open(q){if(!q.length)return;pq=q.map(m=>m.id);pi=0;pc=0;$('md').hidden=false;ask()}
+function ask(){const m=M[pq[pi]];if(!m){fin();return}
+$('mb').innerHTML='<div class="mh"><span>Practice · Question '+(pi+1)+' of '+pq.length+'</span><button class="x" id="cl" aria-label="Close">×</button></div><p class="qt">'+esc(m.q)+'</p>'+m.o.map((o,k)=>'<button class="opt" data-k="'+k+'"><b>'+L[k]+'</b><span>'+esc(o)+'</span></button>').join('')+'<div id="fb"></div>';
+$('cl').onclick=close}
+function close(){$('md').hidden=true;render()}
+function fin(){$('mb').innerHTML='<div class="mh"><span>Practice complete</span><button class="x" id="cl" aria-label="Close">×</button></div><h2>'+pc+' of '+pq.length+' answered correctly</h2><p class="mu">Questions answered correctly were removed from your Mistake Tracker. The rest stay here and will appear again in your tests.</p><button class="bt" id="dn">Done</button>';$('cl').onclick=close;$('dn').onclick=close}
+$('mb').onclick=e=>{const b=e.target.closest('.opt');if(!b||b.disabled)return;const m=M[pq[pi]],k=+b.dataset.k,ok=k===m.a;
+[].forEach.call($('mb').querySelectorAll('.opt'),(o,i)=>{o.disabled=true;if(i===m.a)o.classList.add('ok');else if(i===k)o.classList.add('no')});
+if(ok){pc++;delete M[m.id]}else{m.mine=k;m.times=(m.times||1)+1;m.reviewed=false}save();
+$('fb').innerHTML='<div class="fd '+(ok?'g':'b')+'">'+(ok?'Correct. This question has been removed from your Mistake Tracker.':'Incorrect. The correct answer is '+L[m.a]+'. The question stays in your Mistake Tracker.')+'</div><div class="ex"><b>Explanation.</b> '+esc(m.e)+'</div><button class="bt" id="nx">'+(pi<pq.length-1?'Next question':'Finish')+'</button>';
+$('nx').onclick=()=>{pi++;if(pi<pq.length)ask();else fin()}};
+addEventListener('storage',render);render();
+</script></body></html>
