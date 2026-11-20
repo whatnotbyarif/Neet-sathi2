@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>Daily Planner · NEET Saathi</title>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box}[hidden]{display:none!important}
+:root{--bg:#F5F7FB;--fg:#0F1B33;--mu:#5B6785;--ln:#E2E7F0;--ac:#7C3AED;--ok:#16A34A;--no:#DC2626;--am:#D97706}
+body{margin:0;background:var(--bg);color:var(--fg);font:400 16px/1.5 Inter,system-ui,sans-serif}
+a,button{color:inherit;font-family:inherit;text-decoration:none}a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{outline:2px solid var(--fg);outline-offset:2px}
+.nv{height:57px;display:flex;justify-content:space-between;align-items:center;padding:0 18px;background:#fff;border-bottom:1px solid var(--ln)}
+.logo{font:700 18px Sora;letter-spacing:-.01em}.nl{display:none;gap:26px;font-size:14px;color:var(--mu)}.nl a:hover,.nl a.on{color:var(--fg)}.nl a.on{font-weight:600}
+.login{border:1px solid var(--ln);padding:6px 14px;border-radius:6px;font-size:13px;font-weight:500}
+.w{max-width:960px;margin:0 auto;padding:24px 16px 70px}
+h1{font:800 clamp(26px,5vw,36px)/1.1 Sora;letter-spacing:-.02em;margin:0 0 6px}h2{font:700 18px Sora;margin:0 0 12px}
+.mu{color:var(--mu)}
+.stats{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin:18px 0}
+.stats div{background:#fff;border:1px solid var(--ln);border-radius:12px;padding:14px;box-shadow:0 1px 3px #0f1b3314}.stats b{display:block;font:800 24px Sora}.stats span{font-size:13px;color:var(--mu)}
+.cd{background:#fff;border:1px solid var(--ln);border-radius:12px;padding:16px;margin-bottom:14px;box-shadow:0 1px 3px #0f1b3314}
+.how{background:#fff;border:1px solid var(--ln);border-left:4px solid var(--ac);border-radius:10px;padding:14px 16px;margin-bottom:16px;font-size:15px;color:#33415f}
+.week{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;margin-bottom:14px}
+.dy{background:#fff;border:1px solid var(--ln);border-radius:10px;padding:8px 2px 6px;cursor:pointer;display:grid;justify-items:center;gap:2px}
+.dy small{font-size:11px;color:var(--mu)}.dy b{font:700 16px Sora}.dy i{display:block;width:70%;height:4px;border-radius:3px;background:#E8EDF6;position:relative;overflow:hidden;margin-top:2px}.dy i::after{content:"";position:absolute;left:0;top:0;bottom:0;width:var(--w);background:var(--ok)}
+.dy:hover{border-color:var(--fg)}.dy.on{background:var(--fg);color:#fff;border-color:var(--fg)}.dy.on small{color:#cdd5ea}.dy.td b::after{content:"";display:block;width:5px;height:5px;border-radius:50%;background:var(--ac);margin:1px auto 0}
+.bar{height:8px;background:#E8EDF6;border-radius:6px;overflow:hidden;margin-top:6px}.bar i{display:block;height:100%;border-radius:6px;background:var(--ac)}
+.bg{background:#fff;border:1px solid var(--ln);border-radius:6px;padding:8px 14px;font:500 14px Inter;cursor:pointer}.bg:hover{border-color:var(--fg)}
+.bt{background:var(--fg);color:#fff;border:1px solid var(--fg);border-radius:6px;padding:9px 16px;font:600 14px Inter;cursor:pointer}.bt:disabled{opacity:.4;cursor:default}
+.pr{background:var(--ac);border-color:var(--ac)}
+.gh{display:flex;align-items:center;gap:8px;font:600 12px Inter;letter-spacing:.1em;text-transform:uppercase;color:var(--mu);margin:16px 0 6px}.gh .cn{background:#EEF2FA;border-radius:5px;padding:1px 8px;letter-spacing:0}
+.tk{display:flex;align-items:center;gap:12px;padding:10px 4px;border-top:1px solid var(--ln)}.tk:first-of-type{border-top:0}
+.ckb{flex:none;width:26px;height:26px;border:2px solid #AEB8D0;border-radius:7px;background:#fff;cursor:pointer;position:relative}
+.ckb[aria-pressed="true"]{background:var(--ok);border-color:var(--ok)}.ckb[aria-pressed="true"]::after{content:"";position:absolute;left:7px;top:2px;width:7px;height:13px;border:solid #fff;border-width:0 3px 3px 0;transform:rotate(45deg)}
+.tx{flex:1;min-width:0}.tx span{display:block}.tx small{color:var(--mu)}.tk.dn .tx span{text-decoration:line-through;color:var(--mu)}
+.xb{background:none;border:0;color:var(--mu);font-size:20px;cursor:pointer;padding:4px 8px;line-height:1}.xb:hover{color:var(--no)}
+.add,.set{display:grid;grid-template-columns:1fr;gap:8px}
+input,select{font:inherit;border:1px solid var(--ln);border-radius:6px;padding:9px 10px;background:#fff;color:var(--fg);width:100%}
+.lbl{font:600 11px Inter;letter-spacing:.12em;text-transform:uppercase;color:var(--mu);margin:0 0 4px;display:block}
+.row2{display:flex;justify-content:space-between;gap:10px;font-weight:600}
+.rv{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:10px 0;border-top:1px solid var(--ln)}.rv:first-of-type{border-top:0}.rv small{color:var(--mu);display:block}
+.tag{font:600 12px Inter;border-radius:5px;padding:2px 8px;background:#EEF2FA}.tag.r{background:#FEE2E2;color:#991B1B}.tag.a{background:#FEF3C7;color:#92400E}
+.wk{display:grid;grid-template-columns:44px 1fr 120px;gap:10px;align-items:center;padding:7px 0;font-size:14px}.wk .bar{margin:0}.wk small{color:var(--mu);text-align:right}
+.sbr{margin-bottom:10px}.sbr .row2{font-weight:500;font-size:14px}
+.note{background:#EEF4FF;border:1px solid #C7D8FB;border-radius:10px;padding:12px 14px;margin-bottom:14px;font-size:15px;display:flex;justify-content:space-between;gap:10px;align-items:center}
+.em{text-align:center;padding:26px 10px}.em p{margin:0 0 14px;color:var(--mu)}
+@media(min-width:720px){.nl{display:flex}.nv{padding:0 40px}.stats{grid-template-columns:repeat(4,1fr)}.add{grid-template-columns:140px 1fr 110px auto}.set{grid-template-columns:1fr 1fr auto auto;align-items:end}.wk{grid-template-columns:60px 1fr 150px}}
+</style></head><body>
+<header class="nv"><a class="logo" href="index.html">NEET Saathi</a><div class="nl"><a href="teacher.html">Ask Your Teacher</a><a href="test.html">Mock Test</a><a href="mistakes.html">Mistake Tracker</a><a class="on" href="plan.html">Daily Planner</a></div><a class="login" href="login.html">Log in</a></header>
+<main class="w">
+<h1>Daily Planner</h1><p class="mu" style="margin:0" id="dt"></p>
+<div class="note" id="rm" hidden><span id="rmt"></span><button class="bg" id="rmx">Dismiss</button></div>
+<div id="body"></div>
+</main>
+<script>
+const SK=['Physics','Chemistry','Biology'],GR=['Revision',...SK],DN=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+const $=i=>document.getElementById(i),esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const load=(k,d)=>{try{return JSON.parse(localStorage.getItem(k))||d}catch(e){return d}},put=(k,v)=>{try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}};
+const key=d=>d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
+const today=key(new Date());
+let S=Object.assign({hours:6,rt:'20:00',rem:false,last:''},load('neet_saathi_plan_set',{})),P=load('neet_saathi_plan',{}),sel=today;
+const mins=a=>a.reduce((s,x)=>s+x.m,0),fmt=m=>{const h=Math.floor(m/60),r=m%60;return (h?h+'h ':'')+((r||!h)?r+'m':'')};
+function weak(){const tests=load('neet_saathi_tests',[]),pr=load('neet_saathi_practice',{}),T={};
+tests.forEach(t=>Object.keys(t.topics||{}).forEach(k=>{const x=t.topics[k],o=T[k]=T[k]||{n:k,s:x.s,c:0,t:0};o.c+=x.c;o.t+=x.t}));
+Object.keys(pr).forEach(k=>{if(T[k]){T[k].c+=pr[k].c;T[k].t+=pr[k].t}});
+return Object.values(T).filter(x=>x.t).map(x=>({...x,a:Math.round(x.c/x.t*100)})).sort((a,b)=>a.a-b.a)}
+const mistakes=()=>Object.values(load('neet_saathi_mistakes',{})).filter(m=>!m.reviewed).length;
+function gen(dk){const f=S.hours*60/370,r=m=>Math.max(10,Math.round(m*f/5)*5),W=weak().filter(x=>x.a<75).slice(0,2),mc=mistakes(),t=[];let n=0;
+const add=(s,x,m)=>t.push({id:Date.now()+(n++),s:s,x:x,m:r(m),d:0});
+add('Revision',mc?'Review '+Math.min(mc,10)+' questions in your Mistake Tracker':'Revise notes from yesterday',20);
+W.forEach(x=>add(x.s,'Practise weak topic: '+x.n,40));
+SK.forEach(s=>{add(s,'Study a new chapter or concept',60);add(s,'Solve practice questions',30)});
+if(new Date(dk+'T00:00:00').getDay()===0)add('Revision','Take a full-length mock test',90);
+return t}
+function stat(dk){const p=P[dk];if(!p||!p.t.length)return null;const d=p.t.filter(x=>x.d);return{tot:p.t.length,dn:d.length,pm:mins(p.t),dm:mins(d),pc:Math.round(d.length/p.t.length*100)}}
+function streak(){let n=0,d=new Date();for(let i=0;i<60;i++){const s=stat(key(d));if(s&&s.pc>=80)n++;else if(i>0)break;d.setDate(d.getDate()-1)}return n}
+function weekDates(){const d0=new Date();d0.setDate(d0.getDate()-((d0.getDay()+6)%7));const w=[];for(let i=0;i<7;i++){const d=new Date(d0);d.setDate(d0.getDate()+i);w.push(d)}return w}
+function render(){const dk=sel;if(!P[dk]&&dk>=today)P[dk]={t:gen(dk)};put('neet_saathi_plan',P);const p=P[dk],s=stat(dk),W=weekDates(),wd=W.map(d=>stat(key(d))).filter(Boolean);
+const nd=new Date(dk+'T00:00:00');$('dt').textContent=nd.toLocaleDateString('en-IN',{weekday:'long',day:'numeric',month:'long',year:'numeric'})+(dk===today?' (today)':'');
+const tg=S.hours*60,dm=s?s.dm:0,wavg=wd.length?Math.round(wd.reduce((a,x)=>a+x.pc,0)/wd.length):0;
+let h='<div class="week">'+W.map(d=>{const k=key(d),x=stat(k);return '<button class="dy'+(k===sel?' on':'')+(k===today?' td':'')+'" data-d="'+k+'" aria-label="'+DN[d.getDay()]+' '+d.getDate()+'"><small>'+DN[d.getDay()]+'</small><b>'+d.getDate()+'</b><i style="--w:'+(x?x.pc:0)+'%"></i></button>'}).join('')+'</div>';
+h+='<div class="stats"><div><b>'+(s?s.dn+' / '+s.tot:'0')+'</b><span>Tasks completed</span></div><div><b>'+fmt(dm)+'</b><span>Studied of '+fmt(tg)+' target</span></div><div><b>'+streak()+'</b><span>Day streak (80% or more done)</span></div><div><b>'+wavg+'%</b><span>Weekly completion</span></div></div>';
+h+='<div class="cd"><div class="row2"><span>Daily study target</span><span>'+Math.min(100,Math.round(dm/tg*100))+'%</span></div><div class="bar"><i style="width:'+Math.min(100,dm/tg*100)+'%"></i></div><small class="mu">'+fmt(dm)+' completed out of '+fmt(tg)+'. Your plan totals '+fmt(s?s.pm:0)+'.</small></div>';
+h+='<div class="cd"><h2>Tasks for this day</h2>';
+if(!p||!p.t.length)h+='<div class="em"><p>'+(p?'No tasks yet. Add your own below, or regenerate the plan.':'No plan was created for this day.')+'</p>'+(p?'':'<button class="bt" data-c="1">Create a plan for this day</button>')+'</div>';
+else GR.forEach(g=>{const a=p.t.filter(x=>x.s===g);if(!a.length)return;h+='<div class="gh">'+g+'<span class="cn">'+a.filter(x=>x.d).length+'/'+a.length+'</span></div>'+a.map(x=>'<div class="tk'+(x.d?' dn':'')+'"><button class="ckb" data-t="'+x.id+'" aria-pressed="'+(x.d?'true':'false')+'" aria-label="Mark as done"></button><div class="tx"><span>'+esc(x.x)+'</span><small>'+fmt(x.m)+'</small></div><button class="xb" data-x="'+x.id+'" aria-label="Delete task">×</button></div>').join('')});
+if(p)h+='<div class="gh">Add your own task</div><div class="add"><div><label class="lbl" for="as">Subject</label><select id="as">'+GR.map(g=>'<option>'+g+'</option>').join('')+'</select></div><div><label class="lbl" for="ax">Task</label><input id="ax" maxlength="80" placeholder="For example, revise Ray Optics"></div><div><label class="lbl" for="am">Minutes</label><input id="am" type="number" min="5" max="300" value="30"></div><div style="align-self:end"><button class="bt" id="ad">Add task</button></div></div>';
+h+='</div>';
+const wk=weak().filter(x=>x.a<75).slice(0,3),mc=mistakes();
+h+='<div class="cd"><h2>Revision reminders</h2>'+(mc?'<div class="rv"><div>Mistake Tracker<small>'+mc+' question'+(mc>1?'s':'')+' waiting for review</small></div><a class="bg" href="mistakes.html">Open</a></div>':'')+wk.map(x=>'<div class="rv"><div>'+esc(x.n)+'<small>'+x.s+' · accuracy '+x.a+'%</small></div><span class="tag '+(x.a<50?'r':'a')+'">'+(x.a<50?'Weak':'Needs work')+'</span></div>').join('')+((!mc&&!wk.length)?'<p class="mu" style="margin:0">Nothing due. Take a mock test and your revision reminders will appear here.</p>':'')+'</div>';
+h+='<div class="cd"><h2>Daily report</h2>'+(s?['Revision',...SK].map(g=>{const a=p.t.filter(x=>x.s===g);if(!a.length)return '';const pm=mins(a),d=mins(a.filter(x=>x.d));return '<div class="sbr"><div class="row2"><span>'+g+'</span><span>'+fmt(d)+' of '+fmt(pm)+'</span></div><div class="bar"><i style="width:'+(pm?d/pm*100:0)+'%"></i></div></div>'}).join('')+'<p class="mu" style="margin:6px 0 0">'+s.dn+' of '+s.tot+' tasks completed ('+s.pc+'%).</p>':'<p class="mu" style="margin:0">No report for this day yet.</p>')+'</div>';
+const tm=wd.reduce((a,x)=>a+x.dm,0),td=wd.reduce((a,x)=>a+x.dn,0),best=W.map(d=>({d:d,s:stat(key(d))})).filter(x=>x.s).sort((a,b)=>b.s.pc-a.s.pc)[0];
+h+='<div class="cd"><h2>Weekly report</h2>'+W.map(d=>{const x=stat(key(d));return '<div class="wk"><span>'+DN[d.getDay()]+' '+d.getDate()+'</span><div class="bar"><i style="width:'+(x?x.pc:0)+'%;background:'+(x&&x.pc>=80?'var(--ok)':x&&x.pc>=40?'var(--am)':'var(--no)')+'"></i></div><small>'+(x?x.dn+'/'+x.tot+' tasks · '+fmt(x.dm):'No plan')+'</small></div>'}).join('')+'<p class="mu" style="margin:10px 0 0">This week: '+td+' tasks completed, '+fmt(tm)+' studied'+(best?', best day '+DN[best.d.getDay()]+' ('+best.s.pc+'%)':'')+'.</p></div>';
+h+='<div class="cd"><h2>Plan settings</h2><div class="set"><div><label class="lbl" for="sh">Daily study target</label><select id="sh">'+[3,4,5,6,7,8,9,10].map(n=>'<option value="'+n+'"'+(n===S.hours?' selected':'')+'>'+n+' hours</option>').join('')+'</select></div><div><label class="lbl" for="st">Reminder time</label><input id="st" type="time" value="'+S.rt+'"></div><div><label class="lbl" for="sr">Reminders</label><button class="bg" id="sr" aria-pressed="'+S.rem+'">'+(S.rem?'On':'Off')+'</button></div><div><button class="bg" id="rg">Regenerate this day’s plan</button></div></div><p class="mu" style="margin:10px 0 0;font-size:14px">Your plan is built from your study target and your weak topics. Reminders appear while this page is open in your browser.</p></div>';
+$('body').innerHTML=h}
+function find(id){const p=P[sel];return p&&p.t.find(x=>x.id===id)}
+$('body').onclick=e=>{const b=e.target.closest('button');if(!b)return;const d=b.dataset;
+if(d.d){sel=d.d;render()}
+else if(d.t){const x=find(+d.t);x.d=x.d?0:1;put('neet_saathi_plan',P);render()}
+else if(d.x){P[sel].t=P[sel].t.filter(x=>x.id!==+d.x);put('neet_saathi_plan',P);render()}
+else if(d.c){P[sel]={t:gen(sel)};render()}
+else if(b.id==='ad'){const x=$('ax').value.trim(),m=Math.max(5,Math.min(300,+$('am').value||30));if(!x){$('ax').focus();return}P[sel].t.push({id:Date.now(),s:$('as').value,x:x,m:m,d:0});put('neet_saathi_plan',P);render()}
+else if(b.id==='rg'){if(confirm('Regenerate this day’s plan? Your current tasks for this day will be replaced.')){P[sel]={t:gen(sel)};render()}}
+else if(b.id==='sr'){if(!S.rem&&'Notification' in window&&Notification.permission==='default')Notification.requestPermission();S.rem=!S.rem;put('neet_saathi_plan_set',S);render()}};
+$('body').onchange=e=>{if(e.target.id==='sh'){S.hours=+e.target.value;put('neet_saathi_plan_set',S);render()}if(e.target.id==='st'&&e.target.value){S.rt=e.target.value;S.last='';put('neet_saathi_plan_set',S)}};
+function chk(){if(!S.rem)return;const n=new Date(),hm=String(n.getHours()).padStart(2,'0')+':'+String(n.getMinutes()).padStart(2,'0'),p=P[today];
+if(hm>=S.rt&&S.last!==today&&p&&p.t.some(x=>!x.d)){S.last=today;put('neet_saathi_plan_set',S);const c=p.t.filter(x=>!x.d).length,m='Revision reminder: '+c+' task'+(c>1?'s are':' is')+' still pending today.';$('rmt').textContent=m;$('rm').hidden=false;try{if('Notification' in window&&Notification.permission==='granted')new Notification('NEET Saathi',{body:m})}catch(e){}}}
+$('rmx').onclick=()=>{$('rm').hidden=true};
+addEventListener('storage',render);render();chk();setInterval(chk,30000);
+</script></body></html>
