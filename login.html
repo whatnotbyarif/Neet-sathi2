@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>Log in · NEET Saathi</title>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script><script src="config.js"></script>
+<style>
+*{box-sizing:border-box}[hidden]{display:none!important}
+:root{--bg:#F5F7FB;--fg:#0F1B33;--mu:#5B6785;--ln:#E2E7F0;--ac:#2563EB;--ok:#16A34A;--no:#DC2626}
+body{margin:0;background:var(--bg);color:var(--fg);font:400 16px/1.5 Inter,system-ui,sans-serif}
+a,button{color:inherit;font-family:inherit;text-decoration:none}a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{outline:2px solid var(--ac);outline-offset:2px}
+.nv{height:57px;display:flex;justify-content:space-between;align-items:center;padding:0 18px;background:#fff;border-bottom:1px solid var(--ln)}
+.logo{font:700 18px Sora;letter-spacing:-.01em}.nl{display:none;gap:26px;font-size:14px;color:var(--mu)}.nl a:hover{color:var(--fg)}
+.login{border:1px solid var(--ln);padding:6px 14px;border-radius:6px;font-size:13px;font-weight:500}
+.w{max-width:440px;margin:0 auto;padding:36px 16px 70px}
+h1{font:800 28px/1.15 Sora;letter-spacing:-.02em;margin:0 0 6px}h2{font:700 18px Sora;margin:0 0 4px}
+.mu{color:var(--mu)}
+.cd{background:#fff;border:1px solid var(--ln);border-radius:12px;padding:20px;box-shadow:0 1px 3px #0f1b3314;margin-top:18px}
+.tabs{display:flex;gap:6px;margin-bottom:16px}.tabs button{flex:1;background:#fff;border:1px solid var(--ln);border-radius:6px;padding:9px;font:500 14px Inter;cursor:pointer}.tabs button.on{background:var(--fg);color:#fff;border-color:var(--fg)}
+label{display:block;font:600 11px Inter;letter-spacing:.12em;text-transform:uppercase;color:var(--mu);margin:14px 0 5px}
+input,select{width:100%;font:inherit;border:1px solid var(--ln);border-radius:6px;padding:10px 11px;background:#fff;color:var(--fg)}
+.bt{width:100%;margin-top:18px;background:var(--fg);color:#fff;border:1px solid var(--fg);border-radius:6px;padding:11px 16px;font:600 15px Inter;cursor:pointer}.bt:disabled{opacity:.5;cursor:default}
+.bg{width:100%;margin-top:10px;background:#fff;border:1px solid var(--ln);border-radius:6px;padding:10px 16px;font:500 14px Inter;cursor:pointer;display:block;text-align:center}.bg:hover{border-color:var(--fg)}
+.lk{background:none;border:0;padding:0;margin-top:12px;color:var(--ac);font:500 14px Inter;cursor:pointer;text-decoration:underline}
+.msg{margin-top:14px;padding:10px 12px;border-radius:8px;font-size:14px}.msg.er{background:#FEF2F2;border:1px solid #FCA5A5;color:#991B1B}.msg.ok{background:#F0FDF4;border:1px solid #86EFAC;color:#166534}.msg:empty{display:none}
+.note{background:#FEF3C7;border:1px solid #FCD34D;border-radius:10px;padding:12px 14px;margin-top:18px;font-size:14px;color:#78350F}
+.hr{border:0;border-top:1px solid var(--ln);margin:22px 0 4px}
+.em{font-size:14px;color:var(--mu);margin:0 0 4px;word-break:break-all}
+@media(min-width:720px){.nl{display:flex}.nv{padding:0 40px}}
+</style></head><body>
+<header class="nv"><a class="logo" href="index.html">NEET Saathi</a><div class="nl"><a href="teacher.html">Ask Your Teacher</a><a href="test.html">Mock Test</a><a href="mistakes.html">Mistake Tracker</a><a href="plan.html">Daily Planner</a></div><a class="login" href="login.html">Log in</a></header>
+<main class="w">
+<h1 id="ttl">Welcome to NEET Saathi</h1><p class="mu" style="margin:0" id="sub">Log in or create an account to save your progress.</p>
+<div class="note" id="cfg" hidden>The backend is not connected yet. Open <b>config.js</b> and paste your Supabase Project URL and anon key.</div>
+<div class="cd" id="box">
+<div class="tabs" id="tabs"><button id="tl" class="on" type="button">Log in</button><button id="ts" type="button">Create account</button></div>
+<form id="fl" novalidate><label for="le">Email</label><input id="le" type="email" autocomplete="email" required><label for="lp">Password</label><input id="lp" type="password" autocomplete="current-password" required><button class="bt" type="submit">Log in</button><button class="lk" id="fg" type="button">Forgot your password?</button></form>
+<form id="fs" novalidate hidden><label for="sn">Full name</label><input id="sn" autocomplete="name" maxlength="60" required><label for="se">Email</label><input id="se" type="email" autocomplete="email" required><label for="sp">Password (at least 8 characters)</label><input id="sp" type="password" autocomplete="new-password" minlength="8" required><label for="sy">Year you are appearing for NEET</label><select id="sy"><option>2026</option><option>2027</option><option>2028</option><option>2029</option></select><button class="bt" type="submit">Create account</button></form>
+<form id="ff" novalidate hidden><h2>Reset your password</h2><p class="mu" style="margin:0">Enter your email and we will send you a link to set a new password.</p><label for="fe">Email</label><input id="fe" type="email" autocomplete="email" required><button class="bt" type="submit">Send reset link</button><button class="lk" id="bk" type="button">Back to log in</button></form>
+<form id="rec" novalidate hidden><h2>Set a new password</h2><label for="rp">New password (at least 8 characters)</label><input id="rp" type="password" autocomplete="new-password" minlength="8" required><label for="rq">Confirm new password</label><input id="rq" type="password" autocomplete="new-password" required><button class="bt" type="submit">Save new password</button></form>
+<div id="acc" hidden>
+<h2>Your profile</h2><p class="em" id="am"></p>
+<form id="pf" novalidate><label for="pn">Full name</label><input id="pn" maxlength="60" required><label for="py">Year you are appearing for NEET</label><select id="py"><option>2026</option><option>2027</option><option>2028</option><option>2029</option></select><button class="bt" type="submit">Save profile</button></form>
+<a class="bg" href="dashboard.html" style="margin-top:12px">Go to dashboard</a>
+<hr class="hr"><form id="cp" novalidate><label for="np">Change password</label><input id="np" type="password" autocomplete="new-password" minlength="8" placeholder="New password (at least 8 characters)"><button class="bg" type="submit">Update password</button></form>
+<button class="bg" id="lo" type="button">Log out</button>
+</div>
+<div class="msg" id="msg" role="status" aria-live="polite"></div>
+</div>
+</main>
+<script>
+const C=window.NEET_CONFIG||{},KEYS=['neet_saathi_chats','neet_saathi_mistakes','neet_saathi_tests','neet_saathi_practice','neet_saathi_plan','neet_saathi_plan_set','ns_uid'];
+const $=id=>document.getElementById(id);
+const ready=C.url&&C.key&&!/PASTE/.test(C.url+C.key)&&window.supabase;
+const sb=ready?supabase.createClient(C.url,C.key):null;
+let recovering=/type=recovery/.test(location.hash);
+function msg(t,ok){const m=$('msg');m.textContent=t||'';m.className='msg'+(t?(ok?' ok':' er'):'')}
+function nextUrl(){const n=new URLSearchParams(location.search).get('next');return /^[a-z]+\.html$/.test(n||'')?n:'dashboard.html'}
+function view(v){['fl','fs','ff','rec','acc'].forEach(i=>$(i).hidden=i!==v);$('tabs').hidden=!(v==='fl'||v==='fs');$('tl').classList.toggle('on',v!=='fs');$('ts').classList.toggle('on',v==='fs');msg('');
+$('ttl').textContent=v==='acc'?'Your account':v==='rec'?'New password':'Welcome to NEET Saathi';$('sub').textContent=v==='acc'?'You are logged in. Your progress is saved to your account.':v==='rec'?'Choose a new password for your account.':'Log in or create an account to save your progress.'}
+function err(e){const m=(e&&e.message)||'';
+if(/invalid login/i.test(m))return 'Incorrect email or password.';
+if(/already registered|already been registered/i.test(m))return 'An account with this email already exists. Please log in.';
+if(/not confirmed/i.test(m))return 'Please confirm your email first. Check your inbox.';
+if(/rate limit|too many|seconds/i.test(m))return 'Too many attempts. Please wait a few minutes and try again.';
+if(/password/i.test(m))return 'Please choose a stronger password (at least 8 characters).';
+if(/network|fetch/i.test(m))return 'Network problem. Please check your connection and try again.';
+return 'Something went wrong. Please try again.'}
+async function run(f,fn){const b=f.querySelector('button[type=submit]');b.disabled=true;msg('');try{await fn()}catch(e){msg(err(e))}finally{b.disabled=false}}
+const okMail=s=>/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(s);
+if(!ready){$('cfg').hidden=false;$('box').hidden=true}
+else{
+$('tl').onclick=()=>view('fl');$('ts').onclick=()=>view('fs');$('fg').onclick=()=>view('ff');$('bk').onclick=()=>view('fl');
+$('fl').onsubmit=e=>{e.preventDefault();const em=$('le').value.trim(),pw=$('lp').value;if(!okMail(em)||!pw){msg('Please enter your email and password.');return}
+run($('fl'),async()=>{const r=await sb.auth.signInWithPassword({email:em,password:pw});if(r.error)throw r.error;location.href=nextUrl()})};
+$('fs').onsubmit=e=>{e.preventDefault();const n=$('sn').value.trim(),em=$('se').value.trim(),pw=$('sp').value;
+if(!n){msg('Please enter your full name.');return}if(!okMail(em)){msg('Please enter a valid email address.');return}if(pw.length<8){msg('Your password must have at least 8 characters.');return}
+run($('fs'),async()=>{const r=await sb.auth.signUp({email:em,password:pw,options:{data:{name:n,exam_year:+$('sy').value},emailRedirectTo:location.origin+location.pathname}});if(r.error)throw r.error;
+if(r.data.session){location.href=nextUrl()}else{$('fs').reset();msg('Account created. Please check your email and confirm your address, then log in.',1)}})};
+$('ff').onsubmit=e=>{e.preventDefault();const em=$('fe').value.trim();if(!okMail(em)){msg('Please enter a valid email address.');return}
+run($('ff'),async()=>{const r=await sb.auth.resetPasswordForEmail(em,{redirectTo:location.origin+location.pathname});if(r.error)throw r.error;msg('If an account exists for this email, a reset link has been sent. Please check your inbox.',1)})};
+$('rec').onsubmit=e=>{e.preventDefault();const a=$('rp').value,b=$('rq').value;if(a.length<8){msg('Your password must have at least 8 characters.');return}if(a!==b){msg('The two passwords do not match.');return}
+run($('rec'),async()=>{const r=await sb.auth.updateUser({password:a});if(r.error)throw r.error;recovering=false;history.replaceState(null,'',location.pathname);await showAcc();msg('Your password has been updated.',1)})};
+$('pf').onsubmit=e=>{e.preventDefault();const n=$('pn').value.trim();if(!n){msg('Please enter your name.');return}
+run($('pf'),async()=>{const r=await sb.auth.updateUser({data:{name:n,exam_year:+$('py').value}});if(r.error)throw r.error;msg('Profile saved.',1)})};
+$('cp').onsubmit=e=>{e.preventDefault();const p=$('np').value;if(p.length<8){msg('Your new password must have at least 8 characters.');return}
+run($('cp'),async()=>{const r=await sb.auth.updateUser({password:p});if(r.error)throw r.error;$('np').value='';msg('Password updated.',1)})};
+$('lo').onclick=async()=>{KEYS.forEach(k=>{try{localStorage.removeItem(k)}catch(e){}});await sb.auth.signOut();view('fl');msg('You have been logged out.',1)};
+async function showAcc(){const r=await sb.auth.getUser();if(r.error||!r.data.user){view('fl');return}const u=r.data.user,m=u.user_metadata||{};$('am').textContent=u.email;$('pn').value=m.name||'';if(m.exam_year)$('py').value=m.exam_year;view('acc')}
+sb.auth.onAuthStateChange(ev=>{if(ev==='PASSWORD_RECOVERY'){recovering=true;view('rec')}});
+sb.auth.getSession().then(async r=>{if(recovering){view('rec');return}if(r.data.session)await showAcc();else view('fl')});
+}
+</script></body></html>
