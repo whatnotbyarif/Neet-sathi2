@@ -1,1 +1,1 @@
-window.NEET_CONFIG={url:https://'eztuoamkwjvtlvufprga.supabase.co',key:'sb_publishable_O2D7nt-ICreao3OIApdNXw_BTbLD0wM'};
+window.NEET_CONFIG={url:'https://eztuoamkwjvtlvufprga.supabase.co',key:'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImV6dHVvYW1rd2p2dGx2dWZwcmdhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTUyNDkzNDQsImV4cCI6MjExMDgyNTM0NH0.3EVWSOxbnqWIfoWbC7sCs2w_lJqlLWIz9xZAAtfen8E'};
