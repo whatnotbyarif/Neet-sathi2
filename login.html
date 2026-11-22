@@ -4,48 +4,101 @@
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script><script src="config.js"></script>
 <style>
 *{box-sizing:border-box}[hidden]{display:none!important}
-:root{--bg:#F5F7FB;--fg:#0F1B33;--mu:#5B6785;--ln:#E2E7F0;--ac:#2563EB;--ok:#16A34A;--no:#DC2626}
-body{margin:0;background:var(--bg);color:var(--fg);font:400 16px/1.5 Inter,system-ui,sans-serif}
-a,button{color:inherit;font-family:inherit;text-decoration:none}a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{outline:2px solid var(--ac);outline-offset:2px}
-.nv{height:57px;display:flex;justify-content:space-between;align-items:center;padding:0 18px;background:#fff;border-bottom:1px solid var(--ln)}
-.logo{font:700 18px Sora;letter-spacing:-.01em}.nl{display:none;gap:26px;font-size:14px;color:var(--mu)}.nl a:hover{color:var(--fg)}
-.login{border:1px solid var(--ln);padding:6px 14px;border-radius:6px;font-size:13px;font-weight:500}
-.w{max-width:440px;margin:0 auto;padding:36px 16px 70px}
-h1{font:800 28px/1.15 Sora;letter-spacing:-.02em;margin:0 0 6px}h2{font:700 18px Sora;margin:0 0 4px}
-.mu{color:var(--mu)}
-.cd{background:#fff;border:1px solid var(--ln);border-radius:12px;padding:20px;box-shadow:0 1px 3px #0f1b3314;margin-top:18px}
-.tabs{display:flex;gap:6px;margin-bottom:16px}.tabs button{flex:1;background:#fff;border:1px solid var(--ln);border-radius:6px;padding:9px;font:500 14px Inter;cursor:pointer}.tabs button.on{background:var(--fg);color:#fff;border-color:var(--fg)}
+:root{--fg:#0F1B33;--mu:#5B6785;--bd:#D5DCEB;--ac:#2563EB;--ok:#16A34A;--no:#DC2626}
+body{margin:0;background:#fff;color:var(--fg);font:400 16px/1.5 Inter,system-ui,sans-serif}
+a,button,input,select{font-family:inherit}a{color:inherit;text-decoration:none}
+a:focus-visible,button:focus-visible{outline:2px solid var(--ac);outline-offset:2px}
+.pg{min-height:100vh;min-height:100dvh;display:grid;grid-template-columns:1fr;grid-template-rows:auto 1fr}
+.br{background:linear-gradient(160deg,#1E40AF,#2563EB 55%,#7C3AED);color:#fff;padding:calc(env(safe-area-inset-top) + 14px) 20px 16px;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.br::before,.br::after{content:"";position:absolute;border-radius:50%;background:#ffffff14;animation:bob 8s ease-in-out infinite}
+.br::before{width:200px;height:200px;right:-70px;top:-80px}.br::after{width:130px;height:130px;left:-50px;bottom:-60px;animation-delay:-3s}
+.br>*{position:relative;z-index:1}
+.lg{font:800 19px Sora;letter-spacing:-.01em}
+.br h2{margin:6px 0 0;font:700 14px/1.3 Sora;letter-spacing:-.01em;max-width:230px}
+.br p,.pt{display:none}
+.sf{display:flex;gap:6px;align-items:flex-end}
+.bk{position:relative;width:24px;height:var(--h);background:linear-gradient(90deg,color-mix(in srgb,var(--c) 55%,#000) 0 10%,var(--c) 10%);border-radius:3px 5px 5px 3px;box-shadow:0 6px 10px #0004,inset 0 0 0 1px #fff3;animation:bob 4s ease-in-out infinite;animation-delay:var(--d)}
+.bk::after{content:"";position:absolute;left:30%;right:20%;top:22%;height:2px;background:#ffffffaa;border-radius:2px;box-shadow:0 5px 0 #ffffff77}
+.bk:nth-child(n+4){display:none}
+@keyframes bob{50%{transform:translateY(-7px)}}@keyframes rise{from{opacity:0;transform:translateY(24px)}}
+.fp{padding:22px 18px 44px;width:100%;max-width:480px;margin:0 auto}
+.tabs{position:relative;display:grid;grid-template-columns:1fr 1fr;background:#EEF2FA;border-radius:10px;padding:4px;margin-bottom:6px}
+.t{position:relative;z-index:1;border:0;background:none;padding:10px;font:600 14px Inter;color:var(--mu);cursor:pointer;transition:color .25s}.t.on{color:var(--fg)}
+.th{position:absolute;top:4px;bottom:4px;left:4px;width:calc(50% - 4px);background:#fff;border-radius:8px;transition:transform .35s cubic-bezier(.3,1.25,.4,1);box-shadow:0 2px 8px #0f1b3322}
+.tabs[data-s="s"] .th{transform:translateX(100%)}
+.fm{display:none}.fm.on{display:block;animation:fin .45s both}@keyframes fin{from{opacity:0;transform:translateX(20px)}}
+.fm h3{margin:16px 0 0;font:700 22px Sora}.fm .sb{margin:2px 0 0;color:var(--mu);font-size:14px}
 label{display:block;font:600 11px Inter;letter-spacing:.12em;text-transform:uppercase;color:var(--mu);margin:14px 0 5px}
-input,select{width:100%;font:inherit;border:1px solid var(--ln);border-radius:6px;padding:10px 11px;background:#fff;color:var(--fg)}
-.bt{width:100%;margin-top:18px;background:var(--fg);color:#fff;border:1px solid var(--fg);border-radius:6px;padding:11px 16px;font:600 15px Inter;cursor:pointer}.bt:disabled{opacity:.5;cursor:default}
-.bg{width:100%;margin-top:10px;background:#fff;border:1px solid var(--ln);border-radius:6px;padding:10px 16px;font:500 14px Inter;cursor:pointer;display:block;text-align:center}.bg:hover{border-color:var(--fg)}
-.lk{background:none;border:0;padding:0;margin-top:12px;color:var(--ac);font:500 14px Inter;cursor:pointer;text-decoration:underline}
+.ip{position:relative}
+input,select{width:100%;font:inherit;font-size:16px;border:1.5px solid var(--bd);border-radius:8px;padding:11px 12px;background:#fff;color:var(--fg);transition:border-color .2s,box-shadow .2s}
+input:focus,select:focus{outline:0;border-color:var(--ac);box-shadow:0 0 0 4px #2563EB33}
+.ip input{padding-right:46px}
+.eye{position:absolute;right:5px;top:50%;transform:translateY(-50%);width:36px;height:36px;border:0;background:none;color:var(--mu);cursor:pointer;display:grid;place-items:center}
+.eye svg{width:19px;height:19px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.bt{width:100%;margin-top:18px;background:var(--fg);color:#fff;border:0;border-radius:8px;padding:13px;font:600 15px Inter;cursor:pointer;transition:transform .15s,box-shadow .2s;position:relative;overflow:hidden}
+.bt:hover{transform:translateY(-1px);box-shadow:0 8px 22px #0f1b3366}.bt:active{transform:scale(.98)}.bt:disabled{opacity:.55;cursor:default;transform:none;box-shadow:none}
+.bt::after{content:"";position:absolute;inset:0;background:linear-gradient(110deg,transparent 35%,#ffffff55 50%,transparent 65%);transform:translateX(-120%)}.bt:hover::after{transform:translateX(120%);transition:transform .7s}
+.bg{width:100%;margin-top:10px;background:#fff;border:1.5px solid var(--bd);border-radius:8px;padding:11px;font:500 14px Inter;cursor:pointer;display:block;text-align:center;transition:border-color .2s,transform .15s}.bg:hover{border-color:var(--fg)}.bg:active{transform:scale(.98)}
+.lk{background:none;border:0;color:var(--ac);font:500 14px Inter;cursor:pointer;margin-top:12px;text-decoration:underline;padding:0}
 .msg{margin-top:14px;padding:10px 12px;border-radius:8px;font-size:14px}.msg.er{background:#FEF2F2;border:1px solid #FCA5A5;color:#991B1B}.msg.ok{background:#F0FDF4;border:1px solid #86EFAC;color:#166534}.msg:empty{display:none}
-.note{background:#FEF3C7;border:1px solid #FCD34D;border-radius:10px;padding:12px 14px;margin-top:18px;font-size:14px;color:#78350F}
-.hr{border:0;border-top:1px solid var(--ln);margin:22px 0 4px}
-.em{font-size:14px;color:var(--mu);margin:0 0 4px;word-break:break-all}
-@media(min-width:720px){.nl{display:flex}.nv{padding:0 40px}}
+.note{background:#FEF3C7;border:1px solid #FCD34D;border-radius:10px;padding:12px 14px;margin-bottom:14px;font-size:14px;color:#78350F}
+.em{font-size:14px;color:var(--mu);margin:2px 0 0;word-break:break-all}
+.hr{border:0;border-top:1px solid #E2E7F0;margin:22px 0 2px}
+.ft{margin-top:16px;font-size:12px;color:var(--mu)}
+@media(min-width:760px){
+.pg{grid-template-columns:1.05fr 1fr;grid-template-rows:none}
+.br{display:flex;flex-direction:column;align-items:flex-start;justify-content:space-between;padding:40px 44px;gap:24px}
+.br h2{margin:0 0 10px;font:800 clamp(30px,3.4vw,46px)/1.08 Sora;letter-spacing:-.03em;max-width:460px}
+.br p{display:block;margin:0;color:#DCE6FF;max-width:400px}
+.br::before{width:300px;height:300px;right:-90px;top:-90px}.br::after{width:180px;height:180px;left:-60px;bottom:90px}
+.pt{display:grid;gap:10px;list-style:none;margin:20px 0 0;padding:0}.pt li{display:flex;gap:10px;align-items:center;font-size:15px;animation:rise .7s both}.pt li:nth-child(2){animation-delay:.15s}.pt li:nth-child(3){animation-delay:.3s}.pt i{width:22px;height:22px;border-radius:50%;background:#ffffff2e;display:grid;place-items:center;font-style:normal;font-size:12px}
+.sf{gap:10px}.bk{width:44px}.bk:nth-child(n+4){display:block}
+.fp{padding:64px 40px;align-self:center;max-width:500px}
+}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style></head><body>
-<header class="nv"><a class="logo" href="index.html">NEET Saathi</a><div class="nl"><a href="teacher.html">Ask Your Teacher</a><a href="test.html">Mock Test</a><a href="mistakes.html">Mistake Tracker</a><a href="plan.html">Daily Planner</a></div><a class="login" href="login.html">Log in</a></header>
-<main class="w">
-<h1 id="ttl">Welcome to NEET Saathi</h1><p class="mu" style="margin:0" id="sub">Log in or create an account to save your progress.</p>
+<div class="pg">
+<aside class="br">
+<div><a class="lg" href="index.html">NEET Saathi</a><h2>Learn Smart. Achieve Your Dream.</h2><p>Doubt solving, mock tests and smarter revision for NEET aspirants.</p>
+<ul class="pt"><li><i>✓</i>Step-by-step answers to any doubt</li><li><i>✓</i>Mock tests with detailed analysis</li><li><i>✓</i>Mistakes that return until you fix them</li></ul></div>
+<div class="sf" aria-hidden="true"><div class="bk" style="--c:#2563EB;--h:34px;--d:0s"></div><div class="bk" style="--c:#EA580C;--h:46px;--d:.3s"></div><div class="bk" style="--c:#DB2777;--h:38px;--d:.6s"></div><div class="bk" style="--c:#059669;--h:94px;--d:.9s"></div><div class="bk" style="--c:#7C3AED;--h:78px;--d:1.2s"></div><div class="bk" style="--c:#0891B2;--h:102px;--d:1.5s"></div></div>
+</aside>
+<main class="fp">
 <div class="note" id="cfg" hidden>The backend is not connected yet. Open <b>config.js</b> and paste your Supabase Project URL and anon key.</div>
-<div class="cd" id="box">
-<div class="tabs" id="tabs"><button id="tl" class="on" type="button">Log in</button><button id="ts" type="button">Create account</button></div>
-<form id="fl" novalidate><label for="le">Email</label><input id="le" type="email" autocomplete="email" required><label for="lp">Password</label><input id="lp" type="password" autocomplete="current-password" required><button class="bt" type="submit">Log in</button><button class="lk" id="fg" type="button">Forgot your password?</button></form>
-<form id="fs" novalidate hidden><label for="sn">Full name</label><input id="sn" autocomplete="name" maxlength="60" required><label for="se">Email</label><input id="se" type="email" autocomplete="email" required><label for="sp">Password (at least 8 characters)</label><input id="sp" type="password" autocomplete="new-password" minlength="8" required><label for="sy">Year you are appearing for NEET</label><select id="sy"><option>2026</option><option>2027</option><option>2028</option><option>2029</option></select><button class="bt" type="submit">Create account</button></form>
-<form id="ff" novalidate hidden><h2>Reset your password</h2><p class="mu" style="margin:0">Enter your email and we will send you a link to set a new password.</p><label for="fe">Email</label><input id="fe" type="email" autocomplete="email" required><button class="bt" type="submit">Send reset link</button><button class="lk" id="bk" type="button">Back to log in</button></form>
-<form id="rec" novalidate hidden><h2>Set a new password</h2><label for="rp">New password (at least 8 characters)</label><input id="rp" type="password" autocomplete="new-password" minlength="8" required><label for="rq">Confirm new password</label><input id="rq" type="password" autocomplete="new-password" required><button class="bt" type="submit">Save new password</button></form>
-<div id="acc" hidden>
-<h2>Your profile</h2><p class="em" id="am"></p>
-<form id="pf" novalidate><label for="pn">Full name</label><input id="pn" maxlength="60" required><label for="py">Year you are appearing for NEET</label><select id="py"><option>2026</option><option>2027</option><option>2028</option><option>2029</option></select><button class="bt" type="submit">Save profile</button></form>
-<a class="bg" href="dashboard.html" style="margin-top:12px">Go to dashboard</a>
-<hr class="hr"><form id="cp" novalidate><label for="np">Change password</label><input id="np" type="password" autocomplete="new-password" minlength="8" placeholder="New password (at least 8 characters)"><button class="bg" type="submit">Update password</button></form>
-<button class="bg" id="lo" type="button">Log out</button>
-</div>
+<div id="box">
+<div class="tabs" id="tabs" data-s="l"><i class="th"></i><button class="t on" id="tl" type="button">Log in</button><button class="t" id="ts" type="button">Create account</button></div>
+
+<form class="fm on" id="fl" novalidate><h3>Welcome back</h3><p class="sb">Log in to continue your preparation.</p>
+<label for="le">Email</label><input id="le" type="email" autocomplete="email" placeholder="you@example.com">
+<label for="lp">Password</label><div class="ip"><input id="lp" type="password" autocomplete="current-password" placeholder="Your password"><button type="button" class="eye" aria-label="Show password"><svg viewBox="0 0 24 24"><path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg></button></div>
+<button class="bt" type="submit">Log in</button><button class="lk" id="fg" type="button">Forgot your password?</button></form>
+
+<form class="fm" id="fs" novalidate><h3>Create your account</h3><p class="sb">Free to start. Your progress is saved to your account.</p>
+<label for="sn">Full name</label><input id="sn" autocomplete="name" maxlength="60" placeholder="Your full name">
+<label for="se">Email</label><input id="se" type="email" autocomplete="email" placeholder="you@example.com">
+<label for="sp">Password</label><div class="ip"><input id="sp" type="password" autocomplete="new-password" placeholder="At least 8 characters"><button type="button" class="eye" aria-label="Show password"><svg viewBox="0 0 24 24"><path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg></button></div>
+<label for="sy">Year you are appearing for NEET</label><select id="sy"><option>2026</option><option>2027</option><option>2028</option><option>2029</option></select>
+<button class="bt" type="submit">Create account</button><div class="ft">By continuing, you agree to use NEET Saathi for your exam preparation.</div></form>
+
+<form class="fm" id="ff" novalidate><h3>Reset your password</h3><p class="sb">Enter your email and we will send you a link to set a new password.</p>
+<label for="fe">Email</label><input id="fe" type="email" autocomplete="email" placeholder="you@example.com">
+<button class="bt" type="submit">Send reset link</button><button class="lk" id="bk" type="button">Back to log in</button></form>
+
+<form class="fm" id="rec" novalidate><h3>Set a new password</h3><p class="sb">Choose a new password for your account.</p>
+<label for="rp">New password</label><input id="rp" type="password" autocomplete="new-password" placeholder="At least 8 characters">
+<label for="rq">Confirm new password</label><input id="rq" type="password" autocomplete="new-password" placeholder="Type it again">
+<button class="bt" type="submit">Save new password</button></form>
+
+<div class="fm" id="acc"><h3>Your account</h3><p class="em" id="am"></p><p class="sb">You are logged in. Your progress is saved to your account.</p>
+<form id="pf" novalidate><label for="pn">Full name</label><input id="pn" maxlength="60"><label for="py">Year you are appearing for NEET</label><select id="py"><option>2026</option><option>2027</option><option>2028</option><option>2029</option></select><button class="bt" type="submit">Save profile</button></form>
+<a class="bg" href="dashboard.html">Go to dashboard</a>
+<hr class="hr"><form id="cp" novalidate><label for="np">Change password</label><input id="np" type="password" autocomplete="new-password" placeholder="New password (at least 8 characters)"><button class="bg" type="submit">Update password</button></form>
+<button class="bg" id="lo" type="button">Log out</button></div>
+
 <div class="msg" id="msg" role="status" aria-live="polite"></div>
 </div>
 </main>
+</div>
 <script>
 const C=window.NEET_CONFIG||{},KEYS=['neet_saathi_chats','neet_saathi_mistakes','neet_saathi_tests','neet_saathi_practice','neet_saathi_plan','neet_saathi_plan_set','ns_uid'];
 const $=id=>document.getElementById(id);
@@ -54,8 +107,7 @@ const sb=ready?supabase.createClient(C.url,C.key):null;
 let recovering=/type=recovery/.test(location.hash);
 function msg(t,ok){const m=$('msg');m.textContent=t||'';m.className='msg'+(t?(ok?' ok':' er'):'')}
 function nextUrl(){const n=new URLSearchParams(location.search).get('next');return /^[a-z]+\.html$/.test(n||'')?n:'dashboard.html'}
-function view(v){['fl','fs','ff','rec','acc'].forEach(i=>$(i).hidden=i!==v);$('tabs').hidden=!(v==='fl'||v==='fs');$('tl').classList.toggle('on',v!=='fs');$('ts').classList.toggle('on',v==='fs');msg('');
-$('ttl').textContent=v==='acc'?'Your account':v==='rec'?'New password':'Welcome to NEET Saathi';$('sub').textContent=v==='acc'?'You are logged in. Your progress is saved to your account.':v==='rec'?'Choose a new password for your account.':'Log in or create an account to save your progress.'}
+function view(v){['fl','fs','ff','rec','acc'].forEach(i=>$(i).classList.toggle('on',i===v));const t=v==='fl'||v==='fs';$('tabs').hidden=!t;$('tabs').dataset.s=v==='fs'?'s':'l';$('tl').classList.toggle('on',v!=='fs');$('ts').classList.toggle('on',v==='fs');msg('');scrollTo(0,0)}
 function err(e){const m=(e&&e.message)||'';
 if(/invalid login/i.test(m))return 'Incorrect email or password.';
 if(/already registered|already been registered/i.test(m))return 'An account with this email already exists. Please log in.';
@@ -66,6 +118,7 @@ if(/network|fetch/i.test(m))return 'Network problem. Please check your connectio
 return 'Something went wrong. Please try again.'}
 async function run(f,fn){const b=f.querySelector('button[type=submit]');b.disabled=true;msg('');try{await fn()}catch(e){msg(err(e))}finally{b.disabled=false}}
 const okMail=s=>/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(s);
+document.querySelectorAll('.eye').forEach(b=>b.onclick=()=>{const i=b.parentNode.querySelector('input');i.type=i.type==='password'?'text':'password'});
 if(!ready){$('cfg').hidden=false;$('box').hidden=true}
 else{
 $('tl').onclick=()=>view('fl');$('ts').onclick=()=>view('fs');$('fg').onclick=()=>view('ff');$('bk').onclick=()=>view('fl');
