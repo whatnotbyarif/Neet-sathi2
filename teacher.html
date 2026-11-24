@@ -30,13 +30,13 @@ aside.open{transform:none;box-shadow:0 0 0 100vmax #0f1b3355}
 .u small{display:block;opacity:.7;font-size:12px;margin-top:4px}
 .a{background:#fff;border:1px solid var(--ln);border-radius:12px;padding:16px;box-shadow:0 1px 3px #0f1b3314}
 .who{font:700 12px Sora;color:var(--ac);letter-spacing:.06em;text-transform:uppercase;margin-bottom:8px}
-.a p{margin:0 0 6px}
+.a p{margin:0 0 6px;white-space:pre-wrap}
 .stps{list-style:none;margin:10px 0;padding:0;display:grid;gap:12px;counter-reset:s}
 .stps li{counter-increment:s;display:grid;grid-template-columns:28px 1fr;gap:10px}
 .stps li::before{content:counter(s);width:24px;height:24px;border-radius:6px;background:#E8EFFE;color:var(--ac);font:700 12px/24px Sora;text-align:center}
-.stps b{display:block;font-weight:600}.stps span{color:var(--mu);font-size:15px}
-.dg{margin:12px 0 0;border:1px solid var(--ln);border-radius:10px;padding:10px;background:#FAFBFE}.dg svg{width:100%;height:auto;display:block}.dg figcaption{font-size:13px;color:var(--mu);margin-top:6px}
-.fu{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}.fu button{background:#EEF2FA;border:0;border-radius:6px;padding:6px 10px;font-size:13px;cursor:pointer}
+.stps b{display:block;font-weight:600}.stps span{color:var(--mu);font-size:15px;white-space:pre-wrap}
+.dg{margin:12px 0 0;border:1px solid var(--ln);border-radius:10px;padding:10px;background:#FAFBFE}.dg svg{width:100%;height:auto;display:block;max-height:340px}.dg figcaption{font-size:13px;color:var(--mu);margin-top:6px}
+.fu{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}.fu button{background:#EEF2FA;border:0;border-radius:6px;padding:6px 10px;font-size:13px;cursor:pointer;text-align:left}
 .dm{font-size:12px;color:var(--mu);margin-top:10px;border-top:1px solid var(--ln);padding-top:8px}
 .ty{display:flex;gap:5px;padding:4px 0}.ty i{width:7px;height:7px;border-radius:50%;background:var(--ac);opacity:.35;animation:bl 1.1s infinite}.ty i:nth-child(2){animation-delay:.18s}.ty i:nth-child(3){animation-delay:.36s}@keyframes bl{50%{opacity:1;transform:translateY(-3px)}}
 .em{max-width:560px;margin:7vh auto 0;text-align:center}.em h1{margin:0 0 8px;font:800 clamp(26px,6vw,38px)/1.1 Sora;letter-spacing:-.02em}.em p{color:var(--mu);margin:0 0 20px}
@@ -75,16 +75,22 @@ textarea{width:100%;border:0;resize:none;font:inherit;outline:0;max-height:140px
 <input type="file" id="fp" accept="image/*" capture="environment" hidden>
 <input type="file" id="fu" accept="image/*,application/pdf" multiple hidden>
 <script>
-/* Put your backend URL here to get real answers. Leave empty for demo mode. */
-var API_URL='';
+var C=window.NEET_CONFIG||{},sb=(C.url&&C.key&&window.supabase)?supabase.createClient(C.url,C.key):null;
+/* Real answers come from your Supabase function. Without a backend the page shows a demo answer. */
+var API_URL=sb?C.url.replace(/\/$/,'')+'/functions/v1/dynamic-service':'';
 var K='neet_saathi_chats',chats=[],cur=null,subj='',files=[],rec=null,busy=0;
 try{chats=JSON.parse(localStorage.getItem(K)||'[]')}catch(e){chats=[]}
 var $=function(i){return document.getElementById(i)},msgs=$('msgs'),ta=$('ta');
 function save(){try{localStorage.setItem(K,JSON.stringify(chats))}catch(e){}}
 function esc(s){return String(s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
 function get(){return chats.filter(function(c){return c.id===cur})[0]}
+/* Safe SVG: only simple drawing elements and attributes are kept */
+var OKT={svg:1,g:1,rect:1,circle:1,ellipse:1,line:1,path:1,polygon:1,polyline:1,text:1,tspan:1};
+var OKA=/^(viewBox|x|y|x1|x2|y1|y2|cx|cy|r|rx|ry|width|height|d|points|fill|stroke|stroke-width|stroke-linecap|stroke-linejoin|stroke-dasharray|opacity|fill-opacity|stroke-opacity|transform|font-size|font-family|font-weight|text-anchor|dominant-baseline|dx|dy)$/;
+function clean(n){[].slice.call(n.childNodes).forEach(function(c){if(c.nodeType===1){if(!OKT[c.localName]){c.remove();return}[].slice.call(c.attributes).forEach(function(a){if(!OKA.test(a.name)||/url\(|javascript|data:|<|&#/i.test(a.value))c.removeAttribute(a.name)});clean(c)}else if(c.nodeType!==3)c.remove()})}
+function safeSvg(s){try{if(typeof s!=='string'||s.length>12000||!/^\s*<svg/i.test(s))return '';var d=new DOMParser().parseFromString(s,'image/svg+xml'),r=d.documentElement;if(!r||r.localName!=='svg'||d.querySelector('parsererror'))return '';var vb=r.getAttribute('viewBox');[].slice.call(r.attributes).forEach(function(a){r.removeAttribute(a.name)});r.setAttribute('viewBox',/^[\d\s.\-]+$/.test(vb||'')?vb:'0 0 420 220');r.setAttribute('xmlns','http://www.w3.org/2000/svg');clean(r);return new XMLSerializer().serializeToString(r)}catch(e){return ''}}
 var SAMPLES=['Why does a nerve impulse jump between nodes of Ranvier?','Derive the relation between the focal length and radius of curvature of a mirror.','Why is the boiling point of water higher than that of H2S?'];
-var DIAG='<svg viewBox="0 0 420 120" role="img" aria-label="Myelinated axon with nodes of Ranvier"><line x1="10" y1="60" x2="410" y2="60" stroke="#94A3B8" stroke-width="6" stroke-linecap="round"/><g fill="#2563EB" opacity=".85"><rect x="30" y="38" width="90" height="44" rx="14"/><rect x="140" y="38" width="90" height="44" rx="14"/><rect x="250" y="38" width="90" height="44" rx="14"/></g><g fill="#0F1B33" font-family="Inter,sans-serif" font-size="11" text-anchor="middle"><text x="75" y="104">Myelin sheath</text><text x="130" y="22">Node</text><text x="240" y="22">Node</text><text x="350" y="22">Node</text></g><g stroke="#EA580C" stroke-width="2.5" fill="none" stroke-linecap="round"><path d="M75 30Q130 4 130 28"/><path d="M185 30Q240 4 240 28"/><path d="M295 30Q350 4 350 28"/></g></svg>';
+var DIAG='<svg viewBox="0 0 420 120"><line x1="10" y1="60" x2="410" y2="60" stroke="#94A3B8" stroke-width="6" stroke-linecap="round"/><g fill="#2563EB" opacity=".85"><rect x="30" y="38" width="90" height="44" rx="14"/><rect x="140" y="38" width="90" height="44" rx="14"/><rect x="250" y="38" width="90" height="44" rx="14"/></g><g fill="#0F1B33" font-family="Inter,sans-serif" font-size="11" text-anchor="middle"><text x="75" y="104">Myelin sheath</text><text x="130" y="22">Node</text><text x="240" y="22">Node</text><text x="350" y="22">Node</text></g></svg>';
 var DEMO={summary:'The impulse jumps from one node of Ranvier to the next. This is called saltatory conduction.',steps:[{title:'Myelin acts as an insulator',text:'The myelin sheath prevents ions from crossing the membrane along most of the axon.'},{title:'Ion exchange happens only at the nodes',text:'Voltage-gated channels are concentrated at the nodes of Ranvier, so depolarisation occurs only there.'},{title:'The signal jumps ahead',text:'Current flows through the axoplasm to the next node, which depolarises and fires in turn.'},{title:'Result: faster conduction',text:'Skipping the myelinated stretches makes conduction much faster and saves energy.'}],diagram:DIAG,caption:'Saltatory conduction along a myelinated axon',fu:['Explain with a numerical example','Compare with a non-myelinated axon'],demo:1};
 function title(t){return t.length>42?t.slice(0,42)+'…':t}
 function renderHist(){var h=$('hist');if(!chats.length){h.innerHTML='<p style="color:#5B6785;font-size:14px;padding:4px 10px">No conversations yet.</p>';return}
@@ -92,7 +98,7 @@ h.innerHTML=chats.slice().sort(function(a,b){return b.u-a.u}).map(function(c){re
 function ans(d){var s='<div class="row"><div class="a"><div class="who">Teacher</div>';
 if(d.summary)s+='<p>'+esc(d.summary)+'</p>';
 if(d.steps&&d.steps.length)s+='<ol class="stps">'+d.steps.map(function(x){return '<li><div><b>'+esc(x.title)+'</b><span>'+esc(x.text)+'</span></div></li>'}).join('')+'</ol>';
-if(d.diagram)s+='<figure class="dg">'+d.diagram+'<figcaption>'+esc(d.caption||'Diagram')+'</figcaption></figure>';
+var g=safeSvg(d.diagram);if(g)s+='<figure class="dg" role="img" aria-label="'+esc(d.caption||'Diagram')+'">'+g+'<figcaption>'+esc(d.caption||'Diagram')+'</figcaption></figure>';
 if(d.fu&&d.fu.length)s+='<div class="fu">'+d.fu.map(function(f){return '<button data-q="'+esc(f)+'">'+esc(f)+'</button>'}).join('')+'</div>';
 if(d.demo)s+='<div class="dm">Sample response (demo mode). Connect your backend to get answers to your own questions.</div>';
 return s+'</div></div>'}
@@ -101,16 +107,24 @@ if(!c||!c.m.length){msgs.innerHTML='<div class="em"><h1>What would you like to u
 msgs.innerHTML=c.m.map(function(m){return m.r==='u'?'<div class="row"><div class="u">'+esc(m.t)+(m.a&&m.a.length?'<small>Attached: '+esc(m.a.join(', '))+'</small>':'')+'</div></div>':ans(m.d)}).join('')+(busy?'<div class="row"><div class="a"><div class="who">Teacher</div><div class="ty"><i></i><i></i><i></i></div></div></div>':'');
 msgs.scrollTop=msgs.scrollHeight}
 function ensure(t){if(!get()){var c={id:'c'+Date.now(),t:title(t||'New conversation'),m:[],u:Date.now()};chats.push(c);cur=c.id}return get()}
-function ask(q,c){
+function hist(c){return c.m.slice(0,-1).slice(-8).map(function(m){return m.r==='u'?{role:'user',text:m.t}:{role:'teacher',text:(m.d.summary||'')+' '+((m.d.steps||[]).map(function(s){return s.title+': '+s.text}).join(' '))}})}
+async function ask(q,c){
 if(!API_URL)return new Promise(function(r){setTimeout(function(){r(DEMO)},1000)});
-var fd=new FormData();fd.append('question',q);fd.append('subject',subj);fd.append('history',JSON.stringify(c.m.slice(-10).map(function(m){return m.r==='u'?{role:'user',text:m.t}:{role:'teacher',text:(m.d.summary||'')}})));files.forEach(function(f){fd.append('files',f)});
-return fetch(API_URL,{method:'POST',body:fd}).then(function(r){if(!r.ok)throw 0;return r.json()})}
+var s=await sb.auth.getSession(),tok=s.data&&s.data.session&&s.data.session.access_token;if(!tok)throw {code:401};
+var fd=new FormData();fd.append('question',q);fd.append('subject',subj);fd.append('history',JSON.stringify(hist(c)));files.forEach(function(f){fd.append('files',f)});
+var r=await fetch(API_URL,{method:'POST',headers:{Authorization:'Bearer '+tok,apikey:C.key},body:fd});
+if(!r.ok)throw {code:r.status};return r.json()}
+function errMsg(e){var k=e&&e.code;
+if(k===429)return 'You have reached today’s question limit. Please come back tomorrow.';
+if(k===401)return 'Your session has expired. Please log in again.';
+if(k===413)return 'The attached files are too large. Please attach smaller files.';
+if(k===500||k===502)return 'The teacher is not available right now. Please try again in a moment.';
+return 'Something went wrong while getting the answer. Please check your connection and try again.'}
 function send(text){if(busy)return;var q=(text!=null?text:ta.value).trim();if(!q&&!files.length)return;if(!q)q='Please explain the attached question.';
-var c=ensure(q),names=files.map(function(f){return f.name});c.m.push({r:'u',t:q,a:names});c.u=Date.now();var sent=files.slice();
+var c=ensure(q),names=files.map(function(f){return f.name});c.m.push({r:'u',t:q,a:names});c.u=Date.now();
 ta.value='';grow();busy=1;renderMsgs();renderHist();save();
 var done=function(d){busy=0;c.m.push({r:'a',d:d});c.u=Date.now();files=[];attach();save();renderMsgs();renderHist()};
-ask(q,c).then(done).catch(function(){done({summary:'Something went wrong while getting the answer. Please try again.',steps:[]})});
-if(API_URL){}}
+ask(q,c).then(done).catch(function(e){done({summary:errMsg(e),steps:[]})})}
 function grow(){ta.style.height='auto';ta.style.height=Math.min(ta.scrollHeight,140)+'px'}
 function attach(){$('att').innerHTML=files.map(function(f,i){return '<span>'+esc(f.name)+'<i data-r="'+i+'" role="button" aria-label="Remove">×</i></span>'}).join('')}
 function addFiles(l){[].forEach.call(l,function(f){if(files.length<4&&f.size<10485760)files.push(f)});attach();$('am').classList.remove('open')}
